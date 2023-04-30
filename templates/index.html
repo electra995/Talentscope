@@ -1,0 +1,17 @@
+<div class="bgimg">
+    <div class="topleft">
+        <p>Home</p>
+    </div>
+    <div class="middle">
+        <h1>Benvenuto</h1>
+        <hr>
+        <p>clicca sul bottone per cominciare il quiz</p>
+    </div>
+    <!--  Non cancellare il bottone sotto, è quello che fa partire il questionario -clarissa -->
+    <form action="{{ url_for('questionario', skill='inizio', role='data_eng') }}">
+        <input type="submit" value="Vai al quiz come data engineer"/>
+    </form>
+    <form action="{{ url_for('questionario', skill='inizio', role='data_analyst') }}">
+        <input type="submit" value="Vai al quiz come data analyst"/>
+    </form>
+</div>
