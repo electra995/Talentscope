@@ -1,6 +1,6 @@
 <!doctype html>
 <html lang="en" data-bs-theme="auto">
-  <head><script src="../static/assets/dist/js/color-modes.js"></script>
+  <head><script src="../graphic/assets/dist/js/color-modes.js"></script>
 
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -11,7 +11,7 @@
 
     <link rel="canonical" href="https://getbootstrap.com/docs/5.3/examples/headers/">
 
-<link href="../static/assets/dist/css/bootstrap.min.css" rel="stylesheet">
+<link href="../graphic/assets/dist/css/bootstrap.min.css" rel="stylesheet">
 
     <style>
       .bd-placeholder-img {
@@ -182,10 +182,9 @@
       </div>
 
       <ul class="nav col-12 col-md-auto mb-2 justify-content-center mb-md-0">
-        <li><a href="index.html" class="nav-link px-2 link-secondary">Home</a></li>
-        <li><a href="Registrazione.html" class="nav-link px-2">Registrazione</a></li>
-        <li><a href="Valutazione.html" class="nav-link px-2">Valutazione</a></li>
-        <li><a href="Aboutus.html" class="nav-link px-2">About us</a></li>
+        <li><a href="{{ url_for('index') }}" class="nav-link px-2 link-secondary">Home</a></li>
+        <li><a href="{{ url_for('seconda') }}" class="nav-link px-2 link-secondary">Valutazione</a></li>
+        <li><a href="Aboutus.html" class="nav-link px-2 link-secondary">About us</a></li>
       </ul>
 
     </header>
