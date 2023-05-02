@@ -1,19 +1,18 @@
+import json
+from itertools import groupby
 from flask import Flask, redirect, url_for
 from flask import render_template
 from flask import request
 from lib.Database import DB
 from lib.Quiz import Quiz
+from lib.Contatore import Contatore
 
 app = Flask(__name__)
 quiz_tot = []
 quiz_per_skill = []
 
-config = {
-    'user': 'root',
-    'password': '****',
-    'host': 'localhost',
-    'database': '****'
-}
+with open('db/config.json', 'r') as f:
+    config = json.load(f)
 
 
 def query_db(skill: str):
@@ -49,6 +48,29 @@ def popola_quiz():
                 quiz_tot.append(quiz)
 
 
+def popola_counter():
+    """
+    Raggruppa le risposte totali per ogni skill e popola una lista di oggetti Contatore in cui tenere traccia delle
+    risposte corrette date dall'utente.
+    :return: Lista di oggetti contatore.
+    """
+    global quiz_tot
+    risposte_per_skill = {}
+    counter_tot = []
+
+    for key, group in groupby(quiz_tot, lambda x: x.skill):
+        risposte_per_skill[key] = list(group)
+
+    for key in risposte_per_skill.keys():
+        counter = 0
+        for quiz in risposte_per_skill[key]:
+            if quiz.check_risposta():
+                counter += 1
+        counter_tot.append(Contatore(key.lower(), counter, len(risposte_per_skill[key])))
+
+    return counter_tot
+
+
 @app.route('/')
 def index():
     return render_template('index.html')
@@ -70,7 +92,8 @@ def questionario(skill: str, role: str):
         elif skill == 'AZURE':
             skill = 'GOOGLE CLOUD'
         elif skill == 'GOOGLE CLOUD':
-            return render_template('valutazioni.html', quiz_tot=quiz_tot)
+            counter_tot = popola_counter()
+            return render_template('valutazioni.html', quiz_tot=quiz_tot, counter_tot=counter_tot)
 
     else:
         pass

@@ -1,0 +1,6 @@
+{
+    "user": "root",
+    "password": "Password al vostro db se prevista",
+    "host": "localhost",
+    "database": "Nome del vostro db"
+}

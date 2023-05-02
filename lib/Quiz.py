@@ -1,5 +1,15 @@
 class Quiz:
-    def __init__(self, id, skill, domanda, risposta1, risposta2, risposta3, risposta_esatta):
+
+    def __init__(self,
+                 id: int,
+                 skill: str,
+                 domanda: str,
+                 risposta1: str,
+                 risposta2: str,
+                 risposta3: str,
+                 risposta_esatta: str
+                 ):
+
         self.id = id
         self.skill = skill
         self.domanda = domanda
