@@ -20,7 +20,7 @@ Per installare i requisiti del progetto, segui i seguenti passaggi:
 - Naviga nella cartella del repository clonato utilizzando il comando cd.
 - Esegui il comando:
 ```
-pip install -r requirements.txt.
+pip install -r requirements.txt
 ```
 
 ### Mac
@@ -28,7 +28,7 @@ pip install -r requirements.txt.
 - Naviga nella cartella del repository clonato utilizzando il comando cd.
 - Esegui il comando:
 ```
-pip install -r requirements.txt.
+pip install -r requirements.txt
 ```
 
 ## Utilizzo
