@@ -1,31 +1,8 @@
-
 import pandas as pd
 from math import pi
-from flask import Flask, render_template
 import matplotlib.pyplot as plt
-import os
-import glob
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-app = Flask(__name__)
-
-@app.route('/')
 def plot():
     # DATA SET
     df = pd.DataFrame({
@@ -85,16 +62,3 @@ def plot():
     plt.title('My chart!')
 
     plt.savefig('static/images/chart.png')
-
-
-    return render_template('plot.html', url='/static/images/chart.png')
-
-
-
-
-if __name__ == '__main__':
-   app.run()
-
-# removing_files = glob.glob('./static/images/*.png')
-# for i in removing_files:
-#     os.remove(i)
