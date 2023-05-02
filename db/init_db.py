@@ -4,7 +4,7 @@ import mysql.connector
 
 def lettore_csv(file):
     lista = []
-    with open(file) as file_csv:
+    with open(file, encoding='utf-8') as file_csv:
         lettore = csv.reader(file_csv, delimiter=";")
         lettore.__next__()
         for riga in lettore:
@@ -17,7 +17,7 @@ lista_u = [('Matteo', 'Barone', 'mail', 'pass', '1', '10', '11', '12', '13', '14
 # data scientist = 0
 lista_voti = [('10', '10', '10', '10', '10'), ('10', '10', '10', '10', '10')]
 
-per1 = '/home/electra/Desktop/Progetto finale/Assessment.csv'
+per1 = './Assessment.csv'
 # per2 = "/Users/baronematteo/Desktop/assesmentdemo/analyst_perc.json"
 
 # print(lettorecsv(per1))
@@ -34,7 +34,7 @@ mydb = mysql.connector.connect(
 my_cursor = mydb.cursor()
 # print(mycursor)
 
-# mycursor.execute('CREATE DATABASE TALENTSC;')
+my_cursor.execute('CREATE DATABASE TALENTSC;')
 my_cursor.execute('USE TALENTSC;')
 # mycursor.execute("DROP TABLE ASSESMENT;")
 
