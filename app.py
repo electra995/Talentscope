@@ -74,7 +74,11 @@ def popola_counter():
 
 @app.route('/')
 def index():
-    return render_template('index.html')
+    return render_template('home.html')
+
+@app.route('/valutazione')
+def seconda():
+    return render_template('seconda.html')
 
 
 @app.route('/quiz/<skill>&<role>', methods=['GET'])
