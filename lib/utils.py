@@ -1,3 +1,5 @@
+from matplotlib import pyplot as plt
+
 '''
 import matplotlib.pyplot as plt
 import pandas as pd
@@ -59,14 +61,9 @@ def grafico():
     plt.show()
 '''
 
-from flask import Flask, render_template
-import matplotlib.pyplot as plt
 
-app = Flask(__name__)
-
-
-@app.route('/')
 def plot():
+    print('ciao mondo')
     left = [1, 2, 3, 4, 5]
     # heights of bars
     height = [10, 24, 36, 40, 5]
@@ -83,9 +80,3 @@ def plot():
     plt.title('My bar chart!')
 
     plt.savefig('static/images/plot.png')
-
-    return render_template('plot.html', url='/static/images/plot.png')
-
-
-if __name__ == '__main__':
-    app.run()

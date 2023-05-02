@@ -6,6 +6,7 @@ from flask import request
 from lib.Database import DB
 from lib.Quiz import Quiz
 from lib.Contatore import Contatore
+from lib.utils import plot
 
 app = Flask(__name__)
 quiz_tot = []
@@ -93,6 +94,8 @@ def questionario(skill: str, role: str):
             skill = 'GOOGLE CLOUD'
         elif skill == 'GOOGLE CLOUD':
             counter_tot = popola_counter()
+            plot()
+
             return render_template('valutazioni.html', quiz_tot=quiz_tot, counter_tot=counter_tot)
 
     else:
