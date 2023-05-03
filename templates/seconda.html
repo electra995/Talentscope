@@ -218,7 +218,7 @@
 
 </main>
 <main>
-    <link href="../static/assets/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="../static/assets/graphic/css/bootstrap.min.css" rel="stylesheet">
 
     <style>
         .bd-placeholder-img {
@@ -314,16 +314,15 @@
                     assesment! </h1>
 
             </div>
-            <a href="{{ url_for('questionario', skill='inizio', role='data_analyst') }}"
-            <button class="btn btn-primary" type="button">Data Analyst
+            <a href="{{ url_for('questionario', skill='inizio', role='data_analyst') }}"></a>
+            <button onclick="window.location.href='{{ url_for('questionario', skill='inizio', role='data_analyst') }}'" class="btn btn-primary" type="button">Data Analyst
             </button>
-            </a>
-            <a href="{{ url_for('questionario', skill='inizio', role='data_analyst') }}"
-            <button class="btn btn-primary" type="button">Data Scientist
+            <a href="{{ url_for('questionario', skill='inizio', role='data_analyst') }}"></a>
+            <button onclick="window.location.href='{{ url_for('questionario', skill='inizio', role='data_analyst') }}'" class="btn btn-primary" type="button">Data Scientist
             </button>
-            </a>
-            </form>
         </div>
+
+
     </div>
 </main>
 
