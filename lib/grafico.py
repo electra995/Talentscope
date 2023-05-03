@@ -1,6 +1,7 @@
 import pandas as pd
 from math import pi
 import matplotlib.pyplot as plt
+import os
 
 
 def plot(role):
@@ -61,4 +62,5 @@ def plot(role):
 
     # plt.title('My chart!')
 # plot(role)
-    plt.savefig('static/images/chart.png')
+    os.makedirs('./static/images', exist_ok=True)
+    plt.savefig('./static/images/chart.png')
