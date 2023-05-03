@@ -61,6 +61,6 @@ def plot(role):
     # plt.show()
 
     # plt.title('My chart!')
-# plot(role)
+    # plot(role)
     os.makedirs('./static/images', exist_ok=True)
     plt.savefig('./static/images/chart.png')
