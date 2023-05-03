@@ -6,12 +6,12 @@ import matplotlib.pyplot as plt
 def plot():
     # DATA SET
     df = pd.DataFrame({
-        'group': ['A', 'B', 'C', 'D'],
-        'var1': [40, 1.5, 30, 4],
-        'var2': [40, 40, 40, 40],
-        'var3': [40, 39, 23, 24],
-        'var4': [40, 31, 33, 14],
-        'var5': [40, 15, 32, 14]
+        'group': ['Data Analyst', 'Tu, mocc a sort'],
+        'AWS': [40, 1.5],
+        'Python': [40, 40],
+        'Azure': [40, 39],
+        'Google Cloud': [40, 31],
+        'placeholder': [40, 15]
     })
 
     # CREAZIONE BACKGROUND PT.1
@@ -59,6 +59,6 @@ def plot():
     # PER VEDERE IL GRAFICO
 #    plt.show()
     # plot title
-    plt.title('My chart!')
+    # plt.title('My chart!')
 
     plt.savefig('static/images/chart.png')
