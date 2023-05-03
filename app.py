@@ -76,6 +76,7 @@ def popola_counter():
 def index():
     return render_template('home.html')
 
+
 @app.route('/valutazione')
 def seconda():
     return render_template('seconda.html')
