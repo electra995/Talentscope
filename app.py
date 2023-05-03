@@ -100,7 +100,7 @@ def questionario(skill: str, role: str):
         elif skill == 'GOOGLE CLOUD':
             counter_tot = popola_counter()
 
-            plot()
+            plot(role)
 
             return render_template('valutazioni.html', quiz_tot=quiz_tot, counter_tot=counter_tot)
 
