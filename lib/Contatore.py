@@ -11,4 +11,4 @@ class Contatore:
         self.risposte_tot = risposte_tot
 
     def percentuale(self):
-        return (self.risposte_esatte / self.risposte_tot) * 100
+        return round((self.risposte_esatte / self.risposte_tot) * 100, 2)

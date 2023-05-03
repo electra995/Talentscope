@@ -22,24 +22,24 @@
     </style>
 </head>
 <body>
-<div class="tabella1">
-    <table>
-        <tr>
-            <th>Domanda</th>
-            <th>Risposta corretta</th>
-            <th>Risposta data</th>
-            <th>Corretta</th>
-        </tr>
-        {% for quiz in quiz_tot %}
-            <tr>
-                <td>{{ quiz.domanda }}</td>
-                <td>{{ quiz.risposte['Esatta'] }}</td>
-                <td>{{ quiz.risposte[quiz.risposte['Data']] }}</td>
-                <td>{{ quiz.check_risposta() }}</td>
-            </tr>
-        {% endfor %}
-    </table>
-</div>
+<!--<div class="tabella1">-->
+<!--    <table>-->
+<!--        <tr>-->
+<!--            <th>Domanda</th>-->
+<!--            <th>Risposta corretta</th>-->
+<!--            <th>Risposta data</th>-->
+<!--            <th>Corretta</th>-->
+<!--        </tr>-->
+<!--        {% for quiz in quiz_tot %}-->
+<!--            <tr>-->
+<!--                <td>{{ quiz.domanda }}</td>-->
+<!--                <td>{{ quiz.risposte['Esatta'] }}</td>-->
+<!--                <td>{{ quiz.risposte[quiz.risposte['Data']] }}</td>-->
+<!--                <td>{{ quiz.check_risposta() }}</td>-->
+<!--            </tr>-->
+<!--        {% endfor %}-->
+<!--    </table>-->
+<!--</div>-->
 <br>
 <div class="tabella2">
     <table>
