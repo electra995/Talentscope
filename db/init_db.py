@@ -18,7 +18,6 @@ lista_u = [('Matteo', 'Barone', 'mail', 'pass', '1', '10', '11', '12', '13', '14
 lista_voti = [('10', '10', '10', '10', '10'), ('10', '10', '10', '10', '10')]
 
 per1 = './Assessment.csv'
-# per2 = "/Users/baronematteo/Desktop/assesmentdemo/analyst_perc.json"
 
 # print(lettorecsv(per1))
 lista_dom = lettore_csv(per1)
