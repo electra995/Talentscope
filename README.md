@@ -12,6 +12,20 @@ Per clonare questo repository, segui i seguenti passaggi:
 git clone https://github.com/electra995/flaskProject.git
 ```
 
+## Attivare il virtual enviroment
+Nella directory del progetto eseguire il seguente comando:
+
+### Windows
+```
+venv\Scripts\activate
+```
+
+### Mac
+```
+source venv/bin/activate
+```
+
+
 ## Installare i requisiti
 Per installare i requisiti del progetto, segui i seguenti passaggi:
 
