@@ -1,3 +1,6 @@
+import random
+
+
 class Quiz:
 
     def __init__(self,
@@ -9,17 +12,26 @@ class Quiz:
                  risposta3: str,
                  risposta_esatta: str
                  ):
-
         self.id = id
         self.skill = skill
         self.domanda = domanda
-        self.risposte = {
-            'R1': risposta1,
-            'R2': risposta2,
-            'R3': risposta3,
-            'Esatta': risposta_esatta,
-            'Data': ''
-        }
+        risposte = {'R1': risposta1, 'R2': risposta2, 'R3': risposta3, 'Esatta': risposta_esatta, 'Data': ''}
+        risposte = Quiz.mescola_dizionario(risposte)
+        self.risposte = risposte
+
+    @classmethod
+    def mescola_dizionario(cls, dizionario: dict) -> dict:
+        """
+        Metodo di classe per randomizzare il dizionario delle domande.
+        :param dizionario: Il dizionario delle domande con la relativa risposta esatta.
+        :return: Dizionario delle domande randomizzato.
+        """
+        items = list(dizionario.items())
+        random.shuffle(items)
+        return dict(items)
+
+    def __str__(self):
+        return f'{self.risposte}'
 
     def set_risposta_data(self, risposta: str):
         """
