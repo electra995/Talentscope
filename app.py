@@ -67,7 +67,7 @@ def popola_counter():
         for quiz in risposte_per_skill[key]:
             if quiz.check_risposta():
                 counter += 1
-        counter_tot.append(Contatore(key.lower(), counter, len(risposte_per_skill[key])))
+        counter_tot.append(Contatore(key, counter, len(risposte_per_skill[key])))
 
     return counter_tot
 
@@ -87,25 +87,38 @@ def questionario(skill: str, role: str):
     global quiz_per_skill
     global quiz_tot
 
-    if role == 'data_analyst':
+    if role == 'data analyst':
 
         if skill == 'inizio':
-            skill = 'aws'
-        elif skill == 'aws':
-            skill = 'python'
-        elif skill == 'python':
-            skill = 'AZURE'
-        elif skill == 'AZURE':
-            skill = 'GOOGLE CLOUD'
-        elif skill == 'GOOGLE CLOUD':
+            skill = 'AWS'
+        elif skill == 'AWS':
+            skill = 'Python'
+        elif skill == 'Python':
+            skill = 'MySQL'
+        elif skill == 'MySQL':
+            skill = 'Excel'
+        elif skill == 'Excel':
+            skill = 'PowerBI'
+        elif skill == 'PowerBI':
             counter_tot = popola_counter()
-
-            plot(role)
-
+            plot(role, counter_tot)
             return render_template('valutazioni.html', quiz_tot=quiz_tot, counter_tot=counter_tot)
 
     else:
-        pass
+        if skill == 'inizio':
+            skill = 'ML'
+        elif skill == 'ML':
+            skill = 'Python'
+        elif skill == 'Python':
+            skill = 'MySQL'
+        elif skill == 'MySQL':
+            skill = 'R'
+        elif skill == 'R':
+            skill = 'Git'
+        elif skill == 'Git':
+            counter_tot = popola_counter()
+            plot(role, counter_tot)
+            return render_template('valutazioni.html', quiz_tot=quiz_tot, counter_tot=counter_tot)
 
     query_db(skill)
 
@@ -119,6 +132,16 @@ def post_quiz():
     popola_quiz()
 
     return redirect(url_for('questionario', skill=skill, role=role))
+
+
+@app.route('/aboutus')
+def about_us():
+    return render_template('Aboutus.html')
+
+
+@app.errorhandler(404)
+def page_not_found():
+    return render_template('error404.html'), 404
 
 
 if __name__ == '__main__':

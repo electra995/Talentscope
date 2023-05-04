@@ -4,16 +4,29 @@ import matplotlib.pyplot as plt
 import os
 
 
-def plot(role):
+def plot(role, counter_tot):
     # DATA SET
-    df = pd.DataFrame({
-        'group': ['A', 'B'],
-        'AWS': [3, 1.5],
-        'Python': [3, 1],
-        'Azure': [3, 2],
-        'Google Cloud': [3, 1],
-        'placeholder': [3, 1]
-    })
+    risposte_per_skill = {}
+
+    for contatore in counter_tot:
+        risposte_per_skill[contatore.skill] = contatore.risposte_esatte
+    if role == 'data analyst':
+        df = pd.DataFrame({'group': ['A', 'B'],
+                           'AWS': [3, risposte_per_skill.get('AWS', 0)],
+                           '    Python': [3, risposte_per_skill.get('Python', 0)],
+                           '   MySQL': [3, risposte_per_skill.get('MySQL', 0)],
+                           'Excel   ': [3, risposte_per_skill.get('Excel', 0)],
+                           'PowerBI      ': [3, risposte_per_skill.get('PowerBI', 0)]})
+
+
+    elif role == 'data scientist':
+        df = pd.DataFrame({'group': ['A', 'B'],
+                           'ML': [3, risposte_per_skill.get('ML', 0)],
+                           '    Python': [3, risposte_per_skill.get('Python', 0)],
+                           '   MySQL': [3, risposte_per_skill.get('MySQL', 0)],
+                           'R': [3, risposte_per_skill.get('R', 0)],
+                           'Git': [3, risposte_per_skill.get('Git', 0)]})
+
 
     # CREAZIONE BACKGROUND PT.1
 
@@ -37,7 +50,7 @@ def plot(role):
 
     # DISEGNAMO LE ETICHETTE
     ax.set_rlabel_position(0)
-    plt.yticks([1, 2, 3], ["1", "2", "3"], color="grey", size=7)
+    plt.yticks([0, 1, 2, 3], ["0", "1", "2", "3"], color="grey", size=7)
     plt.ylim(0, 3)
 
     # aggiungi argomenti pt.2
@@ -51,16 +64,16 @@ def plot(role):
     # IND2
     values = df.loc[1].drop("group").values.flatten().tolist()
     values += values[:1]
-    ax.plot(angoli, values, linewidth=1, linestyle='solid', label="mocc a sort")
+    ax.plot(angoli, values, linewidth=1, linestyle='solid', label="Tu")
     ax.fill(angoli, values, 'r', alpha=0.1)
 
     # AGGIUNGIAMO LEGGENDA
-    plt.legend(loc='lower left', bbox_to_anchor=(-0.3, -0.1))
+    plt.legend(loc='lower left', bbox_to_anchor=(-0.4, -0.1))
 
     # PER VEDERE IL GRAFICO
     # plt.show()
 
     # plt.title('My chart!')
-    # plot(role)
+
     os.makedirs('./static/images', exist_ok=True)
     plt.savefig('./static/images/chart.png')

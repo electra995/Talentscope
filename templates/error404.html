@@ -87,6 +87,7 @@
     <link href="headers.css" rel="stylesheet">
 </head>
 <body>
+<main>
     <div class="container">
         <header class="d-flex flex-wrap align-items-center justify-content-center justify-content-md-between py-3 mb-4 border-bottom">
             <div class="col-md-3 mb-2 mb-md-0">
@@ -109,27 +110,12 @@
 
         </header>
     </div>
-    <main>
-    <div class="container">
-        <div class="container col-xl-10 col-xxl-8 px-4 py-40">
-            <h1>  {{ skill }} </h1>
-            <form action="{{ url_for('post_quiz', skill=skill, role=role) }}" method="POST" role="form">
-                {% for quiz in quiz_per_skill %}
-                    <div class="question">
-                        <h3 id={{ quiz.id }}>{{ quiz.domanda }}</h3> <br>
-                        {% for key, value in quiz.risposte.items() if key != 'Data' %}
-                            <div class>
-                                <input id={{ key }} type="radio" name={{ quiz.id }} value={{ key }}>
-                                <label for={{ key }}>{{ value }}</label>
-                            </div>
-                            <br>
-                        {% endfor %}
-                    </div>
-                {% endfor %}
 
-                <input type="submit" value="Submit"/>
-
-            </form>
+</main>
+<main>
+    <div class="container col-xl-10 col-xxl-8 px-4 py-50">
+        <div class="row align-items-center g-lg-5 py-50">
+            <img src="../static/images/error404.png" alt="error">
         </div>
     </div>
 </main>
