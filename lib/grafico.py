@@ -18,7 +18,6 @@ def plot(role, counter_tot):
                            'Excel   ': [3, risposte_per_skill.get('Excel', 0)],
                            'PowerBI      ': [3, risposte_per_skill.get('PowerBI', 0)]})
 
-
     elif role == 'data scientist':
         df = pd.DataFrame({'group': ['A', 'B'],
                            'ML': [3, risposte_per_skill.get('ML', 0)],
@@ -26,7 +25,6 @@ def plot(role, counter_tot):
                            '   MySQL': [3, risposte_per_skill.get('MySQL', 0)],
                            'R': [3, risposte_per_skill.get('R', 0)],
                            'Git': [3, risposte_per_skill.get('Git', 0)]})
-
 
     # CREAZIONE BACKGROUND PT.1
 
