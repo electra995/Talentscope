@@ -62,7 +62,7 @@ def plot(role, counter_tot):
     # IND2
     values = df.loc[1].drop("group").values.flatten().tolist()
     values += values[:1]
-    ax.plot(angoli, values, linewidth=1, linestyle='solid', label="Tu")
+    ax.plot(angoli, values, linewidth=1, linestyle='solid', label="you")
     ax.fill(angoli, values, 'r', alpha=0.1)
 
     # AGGIUNGIAMO LEGGENDA

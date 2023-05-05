@@ -34,24 +34,37 @@
     </header>
 </div>
 <main>
-    <div class="container col-xl-10 col-xxl-8 px-4 py-40">
-        <h1>  {{ skill }} </h1>
-        <form action="{{ url_for('post_quiz', skill=skill, role=role) }}" method="POST" role="form">
-            {% for quiz in quiz_per_skill %}
-                <div class="question">
-                    <h3 id={{ quiz.id }}>{{ quiz.domanda }}</h3> <br>
-                    {% for key, value in quiz.risposte.items() if key != 'Data' %}
-                        <div class>
-                            <input class="form-check-input" id={{ key }} type="radio"
-                                   name={{ quiz.id }} value={{ key }}>
-                            <label for={{ key }}>{{ value }}</label>
-                        </div>
-                        <br>
-                    {% endfor %}
+    <div class="container">
+        <div class="container col-xxl-10 col-xxl-8 px-4 py-40">
+            <div class="container">
+                <div class="d-flex align-items-center p-5 my-5 text-center bg- rounded shadow-sm">
+                    <h1 class="h1 mb-0 text-center lh-1">You are now assessing your knowledge in {{ skill }}</h1>
                 </div>
-            {% endfor %}
-            <input class="btn btn-primary" type="submit" value="Submit"/>
-        </form>
+                <div class="container xxl-8">
+
+                    <form action="{{ url_for('post_quiz', skill=skill, role=role) }}" method="POST" role="form">
+                        {% for quiz in quiz_per_skill %}
+                            <div class="question">
+                                <h4 id={{ quiz.id }}>{{ quiz.domanda }}</h4> <br>
+                                {% for key, value in quiz.risposte.items() if key != 'Data' %}
+                                    <div class>
+                                        <h6>
+                                            <input id={{ key }} type="radio" name={{ quiz.id }} value={{ key }}>
+
+                                            <label for={{ key }}>{{ value }}</label>
+                                        </h6>
+                                    </div>
+                                    <br>
+                                {% endfor %}
+                            </div>
+                        {% endfor %}
+
+                        <input class="btn btn-primary" type="submit" value="Submit"/>
+
+                    </form>
+                </div>
+            </div>
+        </div>
     </div>
 </main>
 

@@ -48,18 +48,20 @@
                     report that highlights your strengths and weaknesses for every skill required, and will provide
                     advices for improvement.</p>
                 <br>
-                <h1 class="display-6 fw-bold lh-1 text-body-emphasis mb-3">Choose your desired position and start the
-                    assesment! </h1>
-
+                <h1 class="display-4 fw-bold lh-1 mb-3">Start the assesment for:</h1>
             </div>
-            <a href="{{ url_for('questionario', skill='inizio', role='data analyst') }}"></a>
-            <button onclick="window.location.href='{{ url_for('questionario', skill='inizio', role='data analyst') }}'"
-                    class="btn btn-primary" type="button">Data Analyst
-            </button>
-            <a href="{{ url_for('questionario', skill='inizio', role='data scientist') }}"></a>
-            <button onclick="window.location.href='{{ url_for('questionario', skill='inizio', role='data scientist') }}'"
-                    class="btn btn-primary" type="button">Data Scientist
-            </button>
+            <div class="col-lg-6 col-xxl-4 my-5">
+                <div class="d-grid gap-2">
+                    <a href="{{ url_for('questionario', skill='inizio', role='data analyst') }}"></a>
+                    <button onclick="window.location.href='{{ url_for('questionario', skill='inizio', role='data analyst') }}'"
+                            class="btn btn-primary px-3" type="button">Data Analyst
+                    </button>
+                    <a href="{{ url_for('questionario', skill='inizio', role='data scientist') }}"></a>
+                    <button onclick="window.location.href='{{ url_for('questionario', skill='inizio', role='data scientist') }}'"
+                            class="btn btn-primary px-3" type="button">Data Scientist
+                    </button>
+                </div>
+            </div>
         </div>
     </div>
 </main>

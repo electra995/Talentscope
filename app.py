@@ -102,7 +102,7 @@ def questionario(skill: str, role: str):
         elif skill == 'PowerBI':
             counter_tot = popola_counter()
             plot(role, counter_tot)
-            return render_template('valutazioni.html', quiz_tot=quiz_tot, counter_tot=counter_tot)
+            return render_template('evaluation_analyst.html', quiz_tot=quiz_tot, counter_tot=counter_tot)
 
     else:
         if skill == 'inizio':
@@ -118,7 +118,7 @@ def questionario(skill: str, role: str):
         elif skill == 'Git':
             counter_tot = popola_counter()
             plot(role, counter_tot)
-            return render_template('valutazioni.html', quiz_tot=quiz_tot, counter_tot=counter_tot)
+            return render_template('evaluation_scientist.html', quiz_tot=quiz_tot, counter_tot=counter_tot)
 
     query_db(skill)
 
