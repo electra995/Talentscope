@@ -95,27 +95,28 @@
                 <span class="fs-4">TalentScope</span>
             </a>
         </div>
-
-        <ul class="nav col-12 col-md-auto mb-2 justify-content-center mb-md-0">
-            <li><a href="{{ url_for('index') }}" class="nav-link px-2 link-secondary">Home</a></li>
-            <li><a href="{{ url_for('seconda') }}" class="nav-link px-2 link-secondary">Valutazione</a></li>
-            <li><a href="{{ url_for('about_us') }}" class="nav-link px-2 link-secondary">About us</a></li>
-        </ul>
-
     </header>
 </div>
     <main>
     <div class="container">
-        <div class="container col-xl-10 col-xxl-8 px-4 py-40">
-            <h1>  {{ skill }} </h1>
+        <div class="container col-xxl-10 col-xxl-8 px-4 py-40">
+            <main class="container">
+  <div class="d-flex align-items-center p-5 my-5 text-center bg- rounded shadow-sm">
+      <h1 class="h1 mb-0 text-center lh-1">You are now assessing your knowledge in {{ skill }}</h1>
+        </div>
+<div class="container xxl-8">
+
             <form action="{{ url_for('post_quiz', skill=skill, role=role) }}" method="POST" role="form">
                 {% for quiz in quiz_per_skill %}
                     <div class="question">
-                        <h3 id={{ quiz.id }}>{{ quiz.domanda }}</h3> <br>
+                        <h4 id={{ quiz.id }}>{{ quiz.domanda }}</h4> <br>
                         {% for key, value in quiz.risposte.items() if key != 'Data' %}
                             <div class>
+                                <h6>
                                 <input id={{ key }} type="radio" name={{ quiz.id }} value={{ key }}>
+
                                 <label for={{ key }}>{{ value }}</label>
+                                    </h6>
                             </div>
                             <br>
                         {% endfor %}
@@ -125,8 +126,10 @@
                 <input type="submit" value="Submit"/>
 
             </form>
-        </div>
     </div>
+    </div>
+        </div>
+        </div>
 </main>
 
 <script src="../static/assets/graphic/js/bootstrap.bundle.min.js"></script>

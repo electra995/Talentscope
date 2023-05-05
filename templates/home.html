@@ -108,19 +108,19 @@
     <div class="container col-xl-10 col-xxl-8 px-4 py-5">
         <div class="row align-items-center g-lg-5 py-5">
             <div class="col-lg-7 text-center text-lg-start">
-                <h1 class="display-4 fw-bold lh-1 text-body-emphasis mb-3">Be the best candidate for your desired job
+                <h1 class="display-4 fw-bold lh-1 text-center mb-3">Be the best candidate for your desired job
                     position!</h1>
                 <br>
-                <p class="col-lg-10 fs-4">Talent scope is the perfect tool to help you achieve your career goals.
-                    Whether you are just starting out in the data industry or looking to advance your career,
+                <p class="col-lg-10 text-center fs-4">Talent scope is the perfect tool to help you achieve your career goals.<br>
+                    Whether you are just starting out in the data industry or looking to advance in your career,
                     TalentScope can help you identify your strengths and weaknesses and provide personalized guidance on
                     how to improve your skills</p>
             </div>
-            <div>
-                <a href="{{ url_for('seconda') }}"></a>
-                <button onclick="window.location.href='{{ url_for('seconda') }}'" class="btn btn-primary" type="button">
+            <div class="d-flex gap-2 justify-content-center py-1">
+  <button onclick="window.location.href='{{ url_for('seconda') }}'" class="btn btn-primary rounded-pill px-5" type="button">
                     Go to the assessment
                 </button>
+</div>
             </div>
         </div>
     </div>

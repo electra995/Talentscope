@@ -1,0 +1,280 @@
+<!doctype html>
+<html lang="en" data-bs-theme="auto" xmlns="http://www.w3.org/1999/html">
+  <head><script src="../static/assets/graphic/js/color-modes.js"></script>
+
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="Mark Otto, Jacob Thornton, and Bootstrap contributors">
+    <meta name="generator" content="Hugo 0.111.3">
+    <title>Dashboard Template · Bootstrap v5.3</title>
+
+    <link rel="canonical" href="https://getbootstrap.com/docs/5.3/examples/dashboard/">
+
+
+
+
+
+<link href="../static/assets/graphic/css/bootstrap.min.css" rel="stylesheet">
+
+    <style>
+      .bd-placeholder-img {
+        font-size: 1.125rem;
+        text-anchor: middle;
+        -webkit-user-select: none;
+        -moz-user-select: none;
+        user-select: none;
+      }
+
+      @media (min-width: 768px) {
+        .bd-placeholder-img-lg {
+          font-size: 3.5rem;
+        }
+      }
+
+      .b-example-divider {
+        width: 100%;
+        height: 3rem;
+        background-color: rgba(0, 0, 0, .1);
+        border: solid rgba(0, 0, 0, .15);
+        border-width: 1px 0;
+        box-shadow: inset 0 .5em 1.5em rgba(0, 0, 0, .1), inset 0 .125em .5em rgba(0, 0, 0, .15);
+      }
+
+      .b-example-vr {
+        flex-shrink: 0;
+        width: 1.5rem;
+        height: 100vh;
+      }
+
+      .bi {
+        vertical-align: -.125em;
+        fill: currentColor;
+      }
+
+      .nav-scroller {
+        position: relative;
+        z-index: 2;
+        height: 2.75rem;
+        overflow-y: hidden;
+      }
+
+      .nav-scroller .nav {
+        display: flex;
+        flex-wrap: nowrap;
+        padding-bottom: 1rem;
+        margin-top: -1px;
+        overflow-x: auto;
+        text-align: center;
+        white-space: nowrap;
+        -webkit-overflow-scrolling: touch;
+      }
+
+      .btn-bd-primary {
+        --bd-violet-bg: #712cf9;
+        --bd-violet-rgb: 112.520718, 44.062154, 249.437846;
+
+        --bs-btn-font-weight: 600;
+        --bs-btn-color: var(--bs-white);
+        --bs-btn-bg: var(--bd-violet-bg);
+        --bs-btn-border-color: var(--bd-violet-bg);
+        --bs-btn-hover-color: var(--bs-white);
+        --bs-btn-hover-bg: #6528e0;
+        --bs-btn-hover-border-color: #6528e0;
+        --bs-btn-focus-shadow-rgb: var(--bd-violet-rgb);
+        --bs-btn-active-color: var(--bs-btn-hover-color);
+        --bs-btn-active-bg: #5a23c8;
+        --bs-btn-active-border-color: #5a23c8;
+      }
+      .bd-mode-toggle {
+        z-index: 1500;
+      }
+    </style>
+
+
+    <!-- Custom styles for this template -->
+    <link href="dashboard.css" rel="stylesheet">
+  </head>
+    <svg xmlns="http://www.w3.org/2000/svg" style="display: none;">
+      <symbol id="check2" viewBox="0 0 16 16">
+        <path d="M13.854 3.646a.5.5 0 0 1 0 .708l-7 7a.5.5 0 0 1-.708 0l-3.5-3.5a.5.5 0 1 1 .708-.708L6.5 10.293l6.646-6.647a.5.5 0 0 1 .708 0z"/>
+      </symbol>
+      <symbol id="circle-half" viewBox="0 0 16 16">
+        <path d="M8 15A7 7 0 1 0 8 1v14zm0 1A8 8 0 1 1 8 0a8 8 0 0 1 0 16z"/>
+      </symbol>
+      <symbol id="moon-stars-fill" viewBox="0 0 16 16">
+        <path d="M6 .278a.768.768 0 0 1 .08.858 7.208 7.208 0 0 0-.878 3.46c0 4.021 3.278 7.277 7.318 7.277.527 0 1.04-.055 1.533-.16a.787.787 0 0 1 .81.316.733.733 0 0 1-.031.893A8.349 8.349 0 0 1 8.344 16C3.734 16 0 12.286 0 7.71 0 4.266 2.114 1.312 5.124.06A.752.752 0 0 1 6 .278z"/>
+        <path d="M10.794 3.148a.217.217 0 0 1 .412 0l.387 1.162c.173.518.579.924 1.097 1.097l1.162.387a.217.217 0 0 1 0 .412l-1.162.387a1.734 1.734 0 0 0-1.097 1.097l-.387 1.162a.217.217 0 0 1-.412 0l-.387-1.162A1.734 1.734 0 0 0 9.31 6.593l-1.162-.387a.217.217 0 0 1 0-.412l1.162-.387a1.734 1.734 0 0 0 1.097-1.097l.387-1.162zM13.863.099a.145.145 0 0 1 .274 0l.258.774c.115.346.386.617.732.732l.774.258a.145.145 0 0 1 0 .274l-.774.258a1.156 1.156 0 0 0-.732.732l-.258.774a.145.145 0 0 1-.274 0l-.258-.774a1.156 1.156 0 0 0-.732-.732l-.774-.258a.145.145 0 0 1 0-.274l.774-.258c.346-.115.617-.386.732-.732L13.863.1z"/>
+      </symbol>
+      <symbol id="sun-fill" viewBox="0 0 16 16">
+        <path d="M8 12a4 4 0 1 0 0-8 4 4 0 0 0 0 8zM8 0a.5.5 0 0 1 .5.5v2a.5.5 0 0 1-1 0v-2A.5.5 0 0 1 8 0zm0 13a.5.5 0 0 1 .5.5v2a.5.5 0 0 1-1 0v-2A.5.5 0 0 1 8 13zm8-5a.5.5 0 0 1-.5.5h-2a.5.5 0 0 1 0-1h2a.5.5 0 0 1 .5.5zM3 8a.5.5 0 0 1-.5.5h-2a.5.5 0 0 1 0-1h2A.5.5 0 0 1 3 8zm10.657-5.657a.5.5 0 0 1 0 .707l-1.414 1.415a.5.5 0 1 1-.707-.708l1.414-1.414a.5.5 0 0 1 .707 0zm-9.193 9.193a.5.5 0 0 1 0 .707L3.05 13.657a.5.5 0 0 1-.707-.707l1.414-1.414a.5.5 0 0 1 .707 0zm9.193 2.121a.5.5 0 0 1-.707 0l-1.414-1.414a.5.5 0 0 1 .707-.707l1.414 1.414a.5.5 0 0 1 0 .707zM4.464 4.465a.5.5 0 0 1-.707 0L2.343 3.05a.5.5 0 1 1 .707-.707l1.414 1.414a.5.5 0 0 1 0 .708z"/>
+      </symbol>
+    </svg>
+
+
+<link href="headers.css" rel="stylesheet">
+</head>
+<body>
+<div class="container">
+    <header class="d-flex flex-wrap align-items-center justify-content-center justify-content-md-between py-3 mb-4 border-bottom">
+        <div class="col-md-3 mb-2 mb-md-0">
+            <a href="/" class="d-inline-flex link-body-emphasis text-decoration-none">
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" stroke="currentColor"
+                     stroke-linecap="round" stroke-linejoin="round" stroke-width="2" class="d-block mx-auto"
+                     role="img" viewBox="0 0 24 24"><title>Product</title>
+                    <circle cx="12" cy="12" r="10"/>
+                    <path d="M14.31 8l5.74 9.94M9.69 8h11.48M7.38 12l5.74-9.94M9.69 16L3.95 6.06M14.31 16H2.83m13.79-4l-5.74 9.94"/>
+                </svg>
+                <span class="fs-4">TalentScope</span>
+            </a>
+        </div>
+
+        <ul class="nav col-12 col-md-auto mb-2 justify-content-center mb-md-0">
+            <li><a href="{{ url_for('index') }}" class="nav-link px-2 link-secondary">Home</a></li>
+            <li><a href="{{ url_for('seconda') }}" class="nav-link px-2 link-secondary">Valutazione</a></li>
+            <li><a href="{{ url_for('about_us') }}" class="nav-link px-2 link-secondary">About us</a></li>
+        </ul>
+
+    </header>
+</div>
+<div class="container xxl-8">
+<h1 class="display-4 fw-bold lh-1 text-center mb-3">Your score</h1>
+    <br>
+    <br>
+    <div class="row row-cols-1 row-cols-md-5 mb-5 text-center">
+      {% for counter in counter_tot %}
+      <div class="col">
+        <div class="card mb-4 rounded-3 shadow-sm">
+          <div class="card-header py-3">
+            <h4 class="my-0 fw-normal">{{ counter.skill }}</h4>
+            <div class="card-body">
+            <h1 class="card-title pricing-card-title">{{ counter.percentuale() }} %</h1>
+            <ul class="list-unstyled mt-3 mb-4">
+              <li>{{ counter.risposte_esatte }}/{{ counter.risposte_tot }} correct answer</li>
+            </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+      {% endfor %}
+    </div>
+</div>
+<div class="container col-xl-10 col-xxl-8 px-4 py-50">
+<div class="album py-5 bg-body-tertiary">
+    <div class="container">
+
+      <div class="row row-cols-2 row-cols-sm-2 row-cols-md-1 g-1">
+        <div class="col">
+          <div class="card shadow-sm">
+            <div class="row align-items-center g-lg-10 py-50">
+            <img src="../static/images/spider.png" alt="error">
+        </div>
+            <div class="card-body">
+              <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
+            </div>
+              </div>
+          </div>
+        </div>
+      </div>
+</div>
+</div>
+<br>
+<div class="container col-xxl-10 col-xxl-8 px-4 py-40">
+      <div class="table-responsive">
+        <table class="table table-striped table-sm">
+          <thead>
+          <h1 class="display-4 fw-bold lh-1 text-center mb-3">Answers recap</h1>
+          <br>
+            <tr>
+              <th class="text-center" scope="col">Question</th>
+              <th class="text-center" scope="col">Right Answer</th>
+              <th class="text-center" scope="col">Your Answer</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+                {% for quiz in quiz_tot %}
+              <td>{{ quiz.domanda }}</td>
+              <td>{{ quiz.risposte['Esatta'] }}</td>
+              <td>{{ quiz.risposte[quiz.risposte['Data']] }}</td>
+            </tr>
+            {% endfor %}
+          </tbody>
+        </table>
+      </div>
+    </div>
+    <br>
+    <div class="container col-xxl-10 col-xxl-8 px-4 py-40">
+    <h1 class="display-4 fw-bold lh-1 text-center mb-3">Get Better</h1>
+    <br>
+    <div class="d-md-flex flex-md-equal w-100 my-md-3 ps-md-3">
+    <div class="text-bg-light me-md-3 pt-3 px-3 pt-md-5 px-md-5 text-center overflow-hidden">
+      <div class="my-3 py-3">
+        <h2 class="display-10">AWS</h2>
+        <br>
+        <div class="row align-items-center g-lg-1 py-40">
+            <a href="https://www.w3schools.com/aws/index.php" type="button" class="w-100 btn btn-sg btn-warning">Tutorials</a>
+            <a href="https://campus.w3schools.com/collections/certifications/products/python-certificate" type="button" class="w-100 btn btn-sg btn-info">Books</a>
+            <a href="https://www.youtube.com/watch?v=ZB5ONbD_SMY&ab_channel=Simplilearn" type="button" class="w-100 btn btn-sg btn-success">Youtube</a>
+          </div>
+      </div>
+    </div>
+      <div class="text-bg-light me-md-3 pt-3 px-3 pt-md-5 px-md-5 text-center overflow-hidden">
+      <div class="my-3 py-3">
+        <h2 class="display-10">Phyton</h2>
+        <br>
+        <div class="row align-items-center g-lg-1 py-40">
+            <a href="https://www.w3schools.com/python/default.asp" type="button" class="w-100 btn btn-sg btn-warning">Tutorials</a>
+            <a href="https://www.w3schools.com/python/python_reference.asp" type="button" class="w-100 btn btn-sg btn-info">Keywords references</a>
+            <a href="https://campus.w3schools.com/collections/certifications/products/python-certificate" type="button" class="w-100 btn btn-sg btn-success">Certification</a>
+          </div>
+      </div>
+    </div>
+      <div class="text-bg-light me-md-3 pt-3 px-3 pt-md-5 px-md-5 text-center overflow-hidden">
+      <div class="my-3 py-3">
+        <h2 class="display-10">MySql</h2>
+        <br>
+        <div class="row align-items-center g-lg-1 py-40">
+                   <a href="https://www.w3schools.com/sql/default.asp" type="button" class="w-100 btn btn-sg btn-warning">Tutorials</a>
+            <a href="https://www.w3schools.com/sql/default.asp" type="button" class="w-100 btn btn-sg btn-info">Keywords references</a>
+            <a href="https://campus.w3schools.com/collections/certifications/products/sql-certificate" type="button" class="w-100 btn btn-sg btn-success">Certification</a>
+          </div>
+      </div>
+    </div>
+      <br>
+    </div>
+        <div class="container col-xl-10 col-xxl-8 px-4 py-40">
+          <div class="d-md-flex flex-md-equal w-100 my-md-3 ps-md-3">
+          <div class="text-bg-light me-md-3 pt-3 px-3 pt-md-5 px-md-5 text-center overflow-hidden">
+            <div class="my-3 py-3">
+            <h2 class="display-10">Excel</h2>
+            <br>
+        <div class="row align-items-center g-lg-1 py-40">
+                  <a href="https://www.w3schools.com/excel/index.php " type="button" class="w-100 btn btn-sg btn-warning">Tutorials</a>
+            <a href="https://trumpexcel.com/best-excel-books/" type="button" class="w-100 btn btn-sg btn-info">Books</a>
+            <a href="https://www.youtube.com/watch?v=Vl0H-qTclOg&ab_channel=freeCodeCamp.org" type="button" class="w-100 btn btn-sg btn-success">Youtube</a>
+          </div>
+          </div>
+      </div>
+            <div class="text-bg-light me-md-3 pt-3 px-3 pt-md-5 px-md-5 text-center overflow-hidden">
+      <div class="my-3 py-3">
+        <h2 class="display-10">Power-bi</h2>
+        <br>
+        <div class="row align-items-center g-lg-1 py-40">
+           <a href="https://learn.microsoft.com/it-it/training/powerplatform/power-bi" type="button" class="w-100 btn btn-sg btn-warning">Tutorials</a>
+            <a href="https://powerbitalks.com/2020/06/best-microsoft-power-bi-books.html" type="button" class="w-100 btn btn-sg btn-info">Books</a>
+            <a href="https://www.youtube.com/watch?v=TmhQCQr_DCA&ab_channel=KevinStratvert" type="button" class="w-100 btn btn-sg btn-success">Youtube</a>
+          </div>
+      </div>
+    </div>
+          </div>
+    </main>
+</div>
+
+
+    <script src="../assets/dist/js/bootstrap.bundle.min.js"></script>
+
+      <script src="https://cdn.jsdelivr.net/npm/feather-icons@4.28.0/dist/feather.min.js" integrity="sha384-uO3SXW5IuS1ZpFPKugNNWqTZRRglnUJK6UAZ/gxOX80nxEkN9NcGZTftn6RzhGWE" crossorigin="anonymous"></script><script src="https://cdn.jsdelivr.net/npm/chart.js@4.2.1/dist/chart.umd.min.js" integrity="sha384-gdQErvCNWvHQZj6XZM0dNsAoY4v+j5P1XDpNkcM3HJG1Yx04ecqIHk7+4VBOCHOG" crossorigin="anonymous"></script><script src="dashboard.js"></script>
+    </div>
+</body>
+</html>
