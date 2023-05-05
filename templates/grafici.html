@@ -7,8 +7,7 @@
 
     <link rel="canonical" href="https://getbootstrap.com/docs/5.3/examples/headers/">
 
-    <link href="../static/assets/graphic/css/bootstrap.min.css" rel="stylesheet">
-
+    <link href="../static/assets/graphic/css/sb-admin-2.min.css" rel="stylesheet">
 </head>
 <body>
 <div class="container">
@@ -35,27 +34,86 @@
     </header>
 </div>
 <main>
-    <div class="container col-xl-10 col-xxl-8 px-4 py-5">
-        <div class="row align-items-center g-lg-5 py-5">
-            <div class="col-lg-7 text-center text-lg-start">
-                <h1 class="display-4 fw-bold lh-1 text-body-emphasis mb-3">Be the best candidate for your desired job
-                    position!</h1>
-                <br>
-                <p class="col-lg-10 fs-4">Talent scope is the perfect tool to help you achieve your career goals.
-                    Whether you are just starting out in the data industry or looking to advance your career,
-                    TalentScope can help you identify your strengths and weaknesses and provide personalized guidance on
-                    how to improve your skills</p>
+    <section class="py-5 text-center container">
+        <div class="row py-lg-5">
+            <div class="col-lg-6 col-md-8 mx-auto">
+                <h1 class="display-4 fw-bold lh-1 text-body-emphasis mb-3">Graphs</h1>
+                <p class="col-lg-12 fs-4">We are a group of Junior Data Engineers among young digital
+                    entrepreneurs, developers, marketers, designers. Born as a startup, we have maintained the same
+                    mentality over time: we are concrete, we look at results and invest in talent and meritocracy.</p>
             </div>
-            <div>
-                <a href="{{ url_for('seconda') }}"></a>
-                <button onclick="window.location.href='{{ url_for('seconda') }}'" class="btn btn-primary" type="button">
-                    Go to the assessment
-                </button>
+        </div>
+    </section>
+    <div class="container">
+        <div id="content-wrapper" class="d-flex flex-column">
+            <div id="content">
+                <div class="container-fluid">
+                    <div class="row">
+                        <div class="col-xl-8 col-lg-7">
+                            <div class="card shadow mb-4">
+                                <div class="card-header py-3">
+                                    <h6 class="m-0 font-weight-bold text-primary">First</h6>
+                                </div>
+                                <div class="card-body">
+                                    <div class="chart-area">
+                                        <img src="../static/images/grafico4.jpeg"
+                                             style="width: 100%; height: 100%; object-fit: cover;">
+
+                                    </div>
+
+                                </div>
+                            </div>
+                            <div class="card shadow mb-4">
+                                <div class="card-header py-3">
+                                    <h6 class="m-0 font-weight-bold text-primary">Second</h6>
+                                </div>
+                                <div class="card-body">
+                                    <div class="chart-bar">
+                                        <img src="../static/images/grafico3.jpeg"
+                                             style="width: 100%; height: 100%; object-fit: cover;">
+
+                                    </div>
+
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-xl-4 col-lg-5">
+                            <div class="card shadow mb-4">
+                                <!-- Card Header - Dropdown -->
+                                <div class="card-header py-3">
+                                    <h6 class="m-0 font-weight-bold text-primary">Third</h6>
+                                </div>
+                                <!-- Card Body -->
+                                <div class="card-body">
+                                    <div class="chart-bar">
+                                        <img src="../static/images/grafico1.jpeg"
+                                             style="width: 100%; height: 100%; object-fit: cover;">
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="col-xl-14 col-lg-14">
+                                <div class="card shadow mb-4">
+                                    <div class="card-header py-3">
+                                        <h6 class="m-0 font-weight-bold text-primary">Fourth</h6>
+                                    </div>
+                                    <!-- Card Body -->
+                                    <div class="card-body">
+                                        <div class="chart-bar">
+                                            <img src="../static/images/grafico2.jpeg"
+                                                 style="width: 100%; height: 100%; object-fit: cover;">
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
 </main>
-
 <script src="../static/assets/graphic/js/bootstrap.bundle.min.js"></script>
 <link href="../static/assets/graphic/css/bootstrap.min.css" rel="stylesheet">
 
@@ -111,6 +169,5 @@
         </ul>
     </footer>
 </div>
-
 </body>
 </html>

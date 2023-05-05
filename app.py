@@ -134,9 +134,14 @@ def post_quiz():
     return redirect(url_for('questionario', skill=skill, role=role))
 
 
-@app.route('/aboutus')
+@app.route('/about')
 def about_us():
-    return render_template('Aboutus.html')
+    return render_template('about_us.html')
+
+
+@app.route('/graph')
+def graph():
+    return render_template('grafici.html')
 
 
 @app.errorhandler(404)

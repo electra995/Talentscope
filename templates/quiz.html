@@ -1,8 +1,6 @@
 <!doctype html>
 <html lang="en" data-bs-theme="auto">
 <head>
-    <script src="../static/assets/graphic/js/color-modes.js"></script>
-
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Talentscope</title>
@@ -10,76 +8,6 @@
     <link rel="canonical" href="https://getbootstrap.com/docs/5.3/examples/headers/">
 
     <link href="../static/assets/graphic/css/bootstrap.min.css" rel="stylesheet">
-
-    <style>
-        .bd-placeholder-img {
-            font-size: 1.125rem;
-            text-anchor: middle;
-            -webkit-user-select: none;
-            -moz-user-select: none;
-            user-select: none;
-        }
-
-        @media (min-width: 768px) {
-            .bd-placeholder-img-lg {
-                font-size: 3.5rem;
-            }
-        }
-
-        .b-example-vr {
-            flex-shrink: 0;
-            width: 1.5rem;
-            height: 100vh;
-        }
-
-        .bi {
-            vertical-align: -.125em;
-            fill: currentColor;
-        }
-
-        .nav-scroller {
-            position: relative;
-            z-index: 2;
-            height: 2.75rem;
-            overflow-y: hidden;
-        }
-
-        .nav-scroller .nav {
-            display: flex;
-            flex-wrap: nowrap;
-            padding-bottom: 1rem;
-            margin-top: -1px;
-            overflow-x: auto;
-            text-align: center;
-            white-space: nowrap;
-            -webkit-overflow-scrolling: touch;
-        }
-
-        .btn-bd-primary {
-            --bd-violet-bg: #712cf9;
-            --bd-violet-rgb: 112.520718, 44.062154, 249.437846;
-
-            --bs-btn-font-weight: 600;
-            --bs-btn-color: var(--bs-white);
-            --bs-btn-bg: var(--bd-violet-bg);
-            --bs-btn-border-color: var(--bd-violet-bg);
-            --bs-btn-hover-color: var(--bs-white);
-            --bs-btn-hover-bg: #6528e0;
-            --bs-btn-hover-border-color: #6528e0;
-            --bs-btn-focus-shadow-rgb: var(--bd-violet-rgb);
-            --bs-btn-active-color: var(--bs-btn-hover-color);
-            --bs-btn-active-bg: #5a23c8;
-            --bs-btn-active-border-color: #5a23c8;
-        }
-
-        .bd-mode-toggle {
-            z-index: 1500;
-        }
-    </style>
-
-
-    <!-- Custom styles for this template -->
-    <link href="headers.css" rel="stylesheet">
 </head>
 <body>
 <div class="container">
@@ -98,34 +26,32 @@
 
         <ul class="nav col-12 col-md-auto mb-2 justify-content-center mb-md-0">
             <li><a href="{{ url_for('index') }}" class="nav-link px-2 link-secondary">Home</a></li>
-            <li><a href="{{ url_for('seconda') }}" class="nav-link px-2 link-secondary">Valutazione</a></li>
+            <li><a href="{{ url_for('seconda') }}" class="nav-link px-2 link-secondary">Assessment</a></li>
             <li><a href="{{ url_for('about_us') }}" class="nav-link px-2 link-secondary">About us</a></li>
+            <li><a href="{{ url_for('graph') }}" class="nav-link px-2 link-secondary">Graphs</a></li>
         </ul>
 
     </header>
 </div>
-    <main>
-    <div class="container">
-        <div class="container col-xl-10 col-xxl-8 px-4 py-40">
-            <h1>  {{ skill }} </h1>
-            <form action="{{ url_for('post_quiz', skill=skill, role=role) }}" method="POST" role="form">
-                {% for quiz in quiz_per_skill %}
-                    <div class="question">
-                        <h3 id={{ quiz.id }}>{{ quiz.domanda }}</h3> <br>
-                        {% for key, value in quiz.risposte.items() if key != 'Data' %}
-                            <div class>
-                                <input id={{ key }} type="radio" name={{ quiz.id }} value={{ key }}>
-                                <label for={{ key }}>{{ value }}</label>
-                            </div>
-                            <br>
-                        {% endfor %}
-                    </div>
-                {% endfor %}
-
-                <input type="submit" value="Submit"/>
-
-            </form>
-        </div>
+<main>
+    <div class="container col-xl-10 col-xxl-8 px-4 py-40">
+        <h1>  {{ skill }} </h1>
+        <form action="{{ url_for('post_quiz', skill=skill, role=role) }}" method="POST" role="form">
+            {% for quiz in quiz_per_skill %}
+                <div class="question">
+                    <h3 id={{ quiz.id }}>{{ quiz.domanda }}</h3> <br>
+                    {% for key, value in quiz.risposte.items() if key != 'Data' %}
+                        <div class>
+                            <input class="form-check-input" id={{ key }} type="radio"
+                                   name={{ quiz.id }} value={{ key }}>
+                            <label for={{ key }}>{{ value }}</label>
+                        </div>
+                        <br>
+                    {% endfor %}
+                </div>
+            {% endfor %}
+            <input class="btn btn-primary" type="submit" value="Submit"/>
+        </form>
     </div>
 </main>
 
@@ -148,7 +74,6 @@
         <path d="M5.026 15c6.038 0 9.341-5.003 9.341-9.334 0-.14 0-.282-.006-.422A6.685 6.685 0 0 0 16 3.542a6.658 6.658 0 0 1-1.889.518 3.301 3.301 0 0 0 1.447-1.817 6.533 6.533 0 0 1-2.087.793A3.286 3.286 0 0 0 7.875 6.03a9.325 9.325 0 0 1-6.767-3.429 3.289 3.289 0 0 0 1.018 4.382A3.323 3.323 0 0 1 .64 6.575v.045a3.288 3.288 0 0 0 2.632 3.218 3.203 3.203 0 0 1-.865.115 3.23 3.23 0 0 1-.614-.057 3.283 3.283 0 0 0 3.067 2.277A6.588 6.588 0 0 1 .78 13.58a6.32 6.32 0 0 1-.78-.045A9.344 9.344 0 0 0 5.026 15z"/>
     </symbol>
 </svg>
-
 
 <div class="container">
     <footer class="d-flex flex-wrap justify-content-between align-items-center py-3 my-4 border-top">
