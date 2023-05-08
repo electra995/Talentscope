@@ -90,6 +90,7 @@ def questionario(skill: str, role: str):
     if role == 'data analyst':
 
         if skill == 'inizio':
+            quiz_tot = []
             skill = 'AWS'
         elif skill == 'AWS':
             skill = 'Python'
@@ -101,11 +102,12 @@ def questionario(skill: str, role: str):
             skill = 'PowerBI'
         elif skill == 'PowerBI':
             counter_tot = popola_counter()
-            plot(role, counter_tot)
+            plot(role, counter_tot, len(quiz_per_skill))
             return render_template('evaluation_analyst.html', quiz_tot=quiz_tot, counter_tot=counter_tot)
 
     else:
         if skill == 'inizio':
+            quiz_tot = []
             skill = 'ML'
         elif skill == 'ML':
             skill = 'Python'
@@ -117,7 +119,7 @@ def questionario(skill: str, role: str):
             skill = 'Git'
         elif skill == 'Git':
             counter_tot = popola_counter()
-            plot(role, counter_tot)
+            plot(role, counter_tot, len(quiz_per_skill))
             return render_template('evaluation_scientist.html', quiz_tot=quiz_tot, counter_tot=counter_tot)
 
     query_db(skill)
@@ -142,6 +144,11 @@ def about_us():
 @app.route('/graph')
 def graph():
     return render_template('grafici.html')
+
+
+@app.route('/chart')
+def chart():
+    return render_template('chart.html')
 
 
 @app.errorhandler(404)

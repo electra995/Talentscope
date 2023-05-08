@@ -158,6 +158,7 @@ db/config.json
 # matplot stuff
 static/images/plot.png
 static/images/chart.png
+templates/chart.html
 
 # PyCharm
 #  JetBrains specific template is maintained in a separate JetBrains.gitignore that can
