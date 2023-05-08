@@ -80,7 +80,8 @@
                 <div class="col">
                     <div class="card shadow-sm">
                         <div class="row align-items-center g-lg-10 py-50">
-                            <iframe width="1000" height="500" src="/chart-scientist" frameBorder="0" style="display: block"></iframe>
+                            <iframe width="1000" height="500" src="/chart-scientist" frameBorder="0"
+                                    style="display: block"></iframe>
                         </div>
                     </div>
                 </div>
@@ -118,80 +119,187 @@
     <h1 class="display-4 fw-bold lh-1 text-center mb-3">Get Better</h1>
     <br>
     <div class="d-md-flex flex-md-equal w-100 my-md-3 ps-md-3">
-        <div class="text-bg-light me-md-3 pt-3 px-3 pt-md-5 px-md-5 text-center overflow-hidden">
-            <div class="my-3 py-3">
-                <h2 class="display-10">ML</h2>
-                <br>
-                <div class="row align-items-center g-lg-1 py-40">
-                    <a href="https://www.w3schools.com/python/python_ml_getting_started.asp" type="button"
-                       class="w-100 btn btn-sg btn-warning">Tutorials</a>
-                    <a href="https://www.projectpro.io/article/machine-learning-books/661" type="button"
-                       class="w-100 btn btn-sg btn-info">Books</a>
-                    <a href="https://www.youtube.com/watch?v=ukzFI9rgwfU&ab_channel=Simplilearn" type="button"
-                       class="w-100 btn btn-sg btn-success">Youtube</a>
-                </div>
-            </div>
-        </div>
-        <div class="text-bg-light me-md-3 pt-3 px-3 pt-md-5 px-md-5 text-center overflow-hidden">
-            <div class="my-3 py-3">
-                <h2 class="display-10">Python</h2>
-                <br>
-                <div class="row align-items-center g-lg-1 py-40">
-                    <a href="https://www.w3schools.com/python/default.asp" type="button"
-                       class="w-100 btn btn-sg btn-warning">Tutorials</a>
-                    <a href="https://www.w3schools.com/python/python_reference.asp" type="button"
-                       class="w-100 btn btn-sg btn-info">Keywords references</a>
-                    <a href="https://campus.w3schools.com/collections/certifications/products/python-certificate"
-                       type="button" class="w-100 btn btn-sg btn-success">Certification</a>
-                </div>
-            </div>
-        </div>
-        <div class="text-bg-light me-md-3 pt-3 px-3 pt-md-5 px-md-5 text-center overflow-hidden">
-            <div class="my-3 py-3">
-                <h2 class="display-10">MySQL</h2>
-                <br>
-                <div class="row align-items-center g-lg-1 py-40">
-                    <a href="https://www.w3schools.com/sql/default.asp" type="button"
-                       class="w-100 btn btn-sg btn-warning">Tutorials</a>
-                    <a href="https://www.w3schools.com/sql/default.asp" type="button" class="w-100 btn btn-sg btn-info">Keywords
-                        references</a>
-                    <a href="https://campus.w3schools.com/collections/certifications/products/sql-certificate"
-                       type="button" class="w-100 btn btn-sg btn-success">Certification</a>
-                </div>
-            </div>
-        </div>
+        {% for counter in counter_tot %}
+            {% if counter.skill.lower() == 'ml' %}
+                {% set ml = counter %}
+                {% if ml.percentuale() > 60 %}
+                    <div class="d-none text-bg-light me-md-3 pt-3 px-3 pt-md-5 px-md-5 text-center overflow-hidden">
+                        <div class="my-3 py-3">
+                            <h2 class="display-10">ML</h2>
+                            <br>
+                            <div class="row align-items-center g-lg-1 py-40">
+                                <a href="https://www.w3schools.com/python/python_ml_getting_started.asp" type="button"
+                                   class="w-100 btn btn-sg btn-warning">Tutorials</a>
+                                <a href="https://www.projectpro.io/article/machine-learning-books/661" type="button"
+                                   class="w-100 btn btn-sg btn-info">Books</a>
+                                <a href="https://www.youtube.com/watch?v=ukzFI9rgwfU&ab_channel=Simplilearn"
+                                   type="button"
+                                   class="w-100 btn btn-sg btn-success">Youtube</a>
+                            </div>
+                        </div>
+                    </div>
+                {% else %}
+                    <div class="text-bg-light me-md-3 pt-3 px-3 pt-md-5 px-md-5 text-center overflow-hidden">
+                        <div class="my-3 py-3">
+                            <h2 class="display-10">ML</h2>
+                            <br>
+                            <div class="row align-items-center g-lg-1 py-40">
+                                <a href="https://www.w3schools.com/python/python_ml_getting_started.asp" type="button"
+                                   class="w-100 btn btn-sg btn-warning">Tutorials</a>
+                                <a href="https://www.projectpro.io/article/machine-learning-books/661" type="button"
+                                   class="w-100 btn btn-sg btn-info">Books</a>
+                                <a href="https://www.youtube.com/watch?v=ukzFI9rgwfU&ab_channel=Simplilearn"
+                                   type="button"
+                                   class="w-100 btn btn-sg btn-success">Youtube</a>
+                            </div>
+                        </div>
+                    </div>
+                {% endif %}
+            {% endif %}
+            {% if counter.skill.lower() == 'python' %}
+                {% set python = counter %}
+                {% if python.percentuale() > 60 %}
+                    <div class="d-none text-bg-light me-md-3 pt-3 px-3 pt-md-5 px-md-5 text-center overflow-hidden">
+                        <div class="my-3 py-3">
+                            <h2 class="display-10">Python</h2>
+                            <br>
+                            <div class="row align-items-center g-lg-1 py-40">
+                                <a href="https://www.w3schools.com/python/default.asp" type="button"
+                                   class="w-100 btn btn-sg btn-warning">Tutorials</a>
+                                <a href="https://www.w3schools.com/python/python_reference.asp" type="button"
+                                   class="w-100 btn btn-sg btn-info">Keywords references</a>
+                                <a href="https://campus.w3schools.com/collections/certifications/products/python-certificate"
+                                   type="button" class="w-100 btn btn-sg btn-success">Certification</a>
+                            </div>
+                        </div>
+                    </div>
+                {% else %}
+                    <div class="text-bg-light me-md-3 pt-3 px-3 pt-md-5 px-md-5 text-center overflow-hidden">
+                        <div class="my-3 py-3">
+                            <h2 class="display-10">Python</h2>
+                            <br>
+                            <div class="row align-items-center g-lg-1 py-40">
+                                <a href="https://www.w3schools.com/python/default.asp" type="button"
+                                   class="w-100 btn btn-sg btn-warning">Tutorials</a>
+                                <a href="https://www.w3schools.com/python/python_reference.asp" type="button"
+                                   class="w-100 btn btn-sg btn-info">Keywords references</a>
+                                <a href="https://campus.w3schools.com/collections/certifications/products/python-certificate"
+                                   type="button" class="w-100 btn btn-sg btn-success">Certification</a>
+                            </div>
+                        </div>
+                    </div>
+                {% endif %}
+            {% endif %}
+            {% if counter.skill.lower() == 'mysql' %}
+                {% set sql = counter %}
+                {% if sql.percentuale() > 60 %}
+                    <div class="d-none text-bg-light me-md-3 pt-3 px-3 pt-md-5 px-md-5 text-center overflow-hidden">
+                        <div class="my-3 py-3">
+                            <h2 class="display-10">MySQL</h2>
+                            <br>
+                            <div class="row align-items-center g-lg-1 py-40">
+                                <a href="https://www.w3schools.com/sql/default.asp" type="button"
+                                   class="w-100 btn btn-sg btn-warning">Tutorials</a>
+                                <a href="https://www.w3schools.com/sql/default.asp" type="button"
+                                   class="w-100 btn btn-sg btn-info">Keywords
+                                    references</a>
+                                <a href="https://campus.w3schools.com/collections/certifications/products/sql-certificate"
+                                   type="button" class="w-100 btn btn-sg btn-success">Certification</a>
+                            </div>
+                        </div>
+                    </div>
+                {% else %}
+                    <div class="text-bg-light me-md-3 pt-3 px-3 pt-md-5 px-md-5 text-center overflow-hidden">
+                        <div class="my-3 py-3">
+                            <h2 class="display-10">MySQL</h2>
+                            <br>
+                            <div class="row align-items-center g-lg-1 py-40">
+                                <a href="https://www.w3schools.com/sql/default.asp" type="button"
+                                   class="w-100 btn btn-sg btn-warning">Tutorials</a>
+                                <a href="https://www.w3schools.com/sql/default.asp" type="button"
+                                   class="w-100 btn btn-sg btn-info">Keywords
+                                    references</a>
+                                <a href="https://campus.w3schools.com/collections/certifications/products/sql-certificate"
+                                   type="button" class="w-100 btn btn-sg btn-success">Certification</a>
+                            </div>
+                        </div>
+                    </div>
+                {% endif %}
+            {% endif %}
+            {% if counter.skill.lower() == 'r' %}
+                {% set r = counter %}
+                {% if r.percentuale() > 60 %}
+                    <div class="d-none text-bg-light me-md-3 pt-3 px-3 pt-md-5 px-md-5 text-center overflow-hidden">
+                        <div class="my-3 py-3">
+                            <h2 class="display-10">R</h2>
+                            <br>
+                            <div class="row align-items-center g-lg-1 py-40">
+                                <a href="https://www.w3schools.com/r/default.asp" type="button"
+                                   class="w-100 btn btn-sg btn-warning">Tutorials</a>
+                                <a href="https://r4ds.had.co.nz/" type="button"
+                                   class="w-100 btn btn-sg btn-info">Books</a>
+                                <a href="https://www.youtube.com/watch?v=_V8eKsto3Ug&ab_channel=freeCodeCamp.org"
+                                   type="button"
+                                   class="w-100 btn btn-sg btn-success">Youtube</a>
+                            </div>
+                        </div>
+                    </div>
+                {% else %}
+                    <div class="text-bg-light me-md-3 pt-3 px-3 pt-md-5 px-md-5 text-center overflow-hidden">
+                        <div class="my-3 py-3">
+                            <h2 class="display-10">R</h2>
+                            <br>
+                            <div class="row align-items-center g-lg-1 py-40">
+                                <a href="https://www.w3schools.com/r/default.asp" type="button"
+                                   class="w-100 btn btn-sg btn-warning">Tutorials</a>
+                                <a href="https://r4ds.had.co.nz/" type="button"
+                                   class="w-100 btn btn-sg btn-info">Books</a>
+                                <a href="https://www.youtube.com/watch?v=_V8eKsto3Ug&ab_channel=freeCodeCamp.org"
+                                   type="button"
+                                   class="w-100 btn btn-sg btn-success">Youtube</a>
+                            </div>
+                        </div>
+                    </div>
+                {% endif %}
+            {% endif %}
+            {% if counter.skill.lower() == 'git' %}
+                {% set git = counter %}
+                {% if git.percentuale() > 60 %}
+                    <div class="d-none text-bg-light me-md-3 pt-3 px-3 pt-md-5 px-md-5 text-center overflow-hidden">
+                        <div class="my-3 py-3">
+                            <h2 class="display-10">Git</h2>
+                            <br>
+                            <div class="row align-items-center g-lg-1 py-40">
+                                <a href="https://www.w3schools.com/git/default.asp" type="button"
+                                   class="w-100 btn btn-sg btn-warning">Tutorials</a>
+                                <a href="https://initialcommit.com/blog/best-git-books-2022" type="button"
+                                   class="w-100 btn btn-sg btn-info">Books</a>
+                                <a href="ttps://www.youtube.com/watch?v=tRZGeaHPoaw&ab_channel=KevinStratvert"
+                                   type="button"
+                                   class="w-100 btn btn-sg btn-success">Youtube</a>
+                            </div>
+                        </div>
+                    </div>
+                {% else %}
+                    <div class="text-bg-light me-md-3 pt-3 px-3 pt-md-5 px-md-5 text-center overflow-hidden">
+                        <div class="my-3 py-3">
+                            <h2 class="display-10">Git</h2>
+                            <br>
+                            <div class="row align-items-center g-lg-1 py-40">
+                                <a href="https://www.w3schools.com/git/default.asp" type="button"
+                                   class="w-100 btn btn-sg btn-warning">Tutorials</a>
+                                <a href="https://initialcommit.com/blog/best-git-books-2022" type="button"
+                                   class="w-100 btn btn-sg btn-info">Books</a>
+                                <a href="ttps://www.youtube.com/watch?v=tRZGeaHPoaw&ab_channel=KevinStratvert"
+                                   type="button"
+                                   class="w-100 btn btn-sg btn-success">Youtube</a>
+                            </div>
+                        </div>
+                    </div>
+                {% endif %}
+            {% endif %}
+        {% endfor %}
         <br>
-    </div>
-    <div class="container col-xl-10 col-xxl-8 px-4 py-40">
-        <div class="d-md-flex flex-md-equal w-100 my-md-3 ps-md-3">
-            <div class="text-bg-light me-md-3 pt-3 px-3 pt-md-5 px-md-5 text-center overflow-hidden">
-                <div class="my-3 py-3">
-                    <h2 class="display-10">R</h2>
-                    <br>
-                    <div class="row align-items-center g-lg-1 py-40">
-                        <a href="https://www.w3schools.com/r/default.asp" type="button"
-                           class="w-100 btn btn-sg btn-warning">Tutorials</a>
-                        <a href="https://r4ds.had.co.nz/" type="button" class="w-100 btn btn-sg btn-info">Books</a>
-                        <a href="https://www.youtube.com/watch?v=_V8eKsto3Ug&ab_channel=freeCodeCamp.org" type="button"
-                           class="w-100 btn btn-sg btn-success">Youtube</a>
-                    </div>
-                </div>
-            </div>
-            <div class="text-bg-light me-md-3 pt-3 px-3 pt-md-5 px-md-5 text-center overflow-hidden">
-                <div class="my-3 py-3">
-                    <h2 class="display-10">Git</h2>
-                    <br>
-                    <div class="row align-items-center g-lg-1 py-40">
-                        <a href="https://www.w3schools.com/git/default.asp" type="button"
-                           class="w-100 btn btn-sg btn-warning">Tutorials</a>
-                        <a href="https://initialcommit.com/blog/best-git-books-2022" type="button"
-                           class="w-100 btn btn-sg btn-info">Books</a>
-                        <a href="ttps://www.youtube.com/watch?v=tRZGeaHPoaw&ab_channel=KevinStratvert" type="button"
-                           class="w-100 btn btn-sg btn-success">Youtube</a>
-                    </div>
-                </div>
-            </div>
-        </div>
     </div>
 </div>
 

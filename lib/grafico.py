@@ -3,16 +3,13 @@ import plotly.offline as py
 
 
 def plot(role, counter_tot, domande_tot):
-    print(role)
     if role == 'data analyst':
-        categories = ['AWS', 'Python', 'Azure', 'Google Cloud', 'PowerBI']
+        categories = ['AWS', 'Python', 'MySQL', 'Excel', 'PowerBI']
         path = './templates/chart-analyst.html'
 
     else:
         categories = ['ML', 'Python', 'MySql', 'R', 'Git']
         path = './templates/chart-scientist.html'
-
-    print(categories)
 
     categories = [*categories, categories[0]]
 
