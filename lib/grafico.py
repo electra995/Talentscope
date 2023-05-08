@@ -6,9 +6,13 @@ def plot(role, counter_tot, domande_tot):
     print(role)
     if role == 'data analyst':
         categories = ['AWS', 'Python', 'Azure', 'Google Cloud', 'PowerBI']
+        path = './templates/chart-analyst.html'
 
     else:
         categories = ['ML', 'Python', 'MySql', 'R', 'Git']
+        path = './templates/chart-scientist.html'
+
+    print(categories)
 
     categories = [*categories, categories[0]]
 
@@ -29,4 +33,4 @@ def plot(role, counter_tot, domande_tot):
         )
     )
 
-    py.plot(fig, auto_open=False, filename='./templates/chart.html')
+    py.plot(fig, auto_open=False, filename=path)

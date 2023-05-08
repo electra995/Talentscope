@@ -146,9 +146,14 @@ def graph():
     return render_template('grafici.html')
 
 
-@app.route('/chart')
-def chart():
-    return render_template('chart.html')
+@app.route('/chart-analyst')
+def chart_analyst():
+    return render_template('chart-analyst.html')
+
+
+@app.route('/chart-scientist')
+def chart_scientist():
+    return render_template('chart-scientist.html')
 
 
 @app.errorhandler(404)
