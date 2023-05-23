@@ -24,18 +24,18 @@ connection: DB = DB(config)
 # data analyst = 1
 # data scientist = 0
 # both = 2
-# lista_skill = [('AWS', '1'), ('Python', '2'), ('MySQL', '2'), ('Excel', '1'), ('PowerBI', '1'), ('ML', '1'),
-#                ('ML', '0'), ('R', '0'), ('Git', '0')]
+lista_skill = [('AWS', '1'), ('Python', '2'), ('MySQL', '2'), ('Excel', '1'), ('PowerBI', '1'),
+               ('ML', '0'), ('R', '0'), ('Git', '0')]
 
 # Creare un database
 connection.query('CREATE DATABASE TALENTSC;', args=None)
 connection.query('USE TALENTSC;', args=None)
 
 # Creo una tabella
-# query = "CREATE TABLE SKILLS(ID INT NOT NULL AUTO_INCREMENT, SKILL VARCHAR(100), ROLE VARCHAR(100), PRIMARY KEY (ID));"
-# connection.query(query, args=None)
-# query = "INSERT INTO SKILLS(SKILL, ROLE) VALUES ( %s, %s);"
-# connection.insertmany(query, lista_skill)
+query = "CREATE TABLE SKILLS(ID INT NOT NULL AUTO_INCREMENT, SKILL VARCHAR(100), ROLE VARCHAR(100), PRIMARY KEY (ID));"
+connection.query(query, args=None)
+query = "INSERT INTO SKILLS(SKILL, ROLE) VALUES ( %s, %s);"
+connection.insertmany(query, lista_skill)
 
 query = "CREATE TABLE ASSESSMENT(ID INT NOT NULL AUTO_INCREMENT, SKILL VARCHAR(20), DOMANDA VARCHAR(1000), " \
         "RISPOSTA1 VARCHAR(1000), RISPOSTA2 VARCHAR(1000),RISPOSTA3 VARCHAR(1000), RISPOSTAESATTA VARCHAR(1000), " \
@@ -45,6 +45,8 @@ query = "INSERT INTO ASSESSMENT(SKILL, DOMANDA, RISPOSTA1, RISPOSTA2, RISPOSTA3,
         "%s, %s, %s);"
 connection.insertmany(query, lista_dom)
 
-query = "CREATE TABLE ANSWERS(ID INT NOT NULL AUTO_INCREMENT, IDDOMANDA INT, RISPOSTA VARCHAR(1000), EMAIL VARCHAR(100)," \
-        "PRIMARY KEY (ID), FOREIGN KEY (IDDOMANDA) REFERENCES ASSESSMENT(ID));"
+query = "CREATE TABLE ANSWERS(ID INT NOT NULL AUTO_INCREMENT, IDDOMANDA INT, IDSKILL INT, RISPOSTA VARCHAR(1000), " \
+        "EMAIL VARCHAR(100)," \
+        "PRIMARY KEY (ID), FOREIGN KEY (IDDOMANDA) REFERENCES ASSESSMENT(ID), FOREIGN KEY (IDSKILL) REFERENCES " \
+        "SKILLS(ID));"
 connection.query(query, args=None)

@@ -33,7 +33,7 @@ def domande_per_skill(skill: str, limit: int) -> list:
     return quiz_per_skill
 
 
-def inserisci_modifica_risposte(email):
+def inserisci_modifica_risposte(email: str):
     """
     Inserisce o modifica le risposte per ogni utente nella tabella ANSWERS del DB.
     :param email: L'email dell'utente.
@@ -43,12 +43,16 @@ def inserisci_modifica_risposte(email):
     risposte = dict(request.form)
     for key in risposte.keys():
         query = f'SELECT RISPOSTA FROM ANSWERS WHERE IDDOMANDA = "{key}" AND EMAIL = "{email}";'
-        id_domanda: str = connection.fetchone(query, args=None)
-        query = f'SELECT {risposte[key]} FROM ASSESSMENT WHERE ID = "{key}";'
-        risposta: str = connection.fetchone(query, args=None)[0]
-        if id_domanda is None:
-            query = f'INSERT INTO ANSWERS(IDDOMANDA, RISPOSTA, EMAIL) VALUES (%s, %s, %s);'
-            args = (key, risposta, email)
+        check: str = connection.fetchone(query, args=None)
+        query = f'SELECT {risposte[key]}, SKILL FROM ASSESSMENT WHERE ID = "{key}";'
+        risposta_skill: tuple = connection.fetchone(query, args=None)
+        risposta: str = risposta_skill[0]
+        skill: str = risposta_skill[1]
+        if check is None:
+            query = f'SELECT ID FROM SKILLS WHERE SKILL = "{skill}"'
+            skill_id: str = connection.fetchone(query, args=None)[0]
+            query = f'INSERT INTO ANSWERS(IDDOMANDA, IDSKILL, RISPOSTA, EMAIL) VALUES (%s, %s, %s, %s);'
+            args = (key, skill_id, risposta, email)
             connection.insert(query, args=args)
         else:
             query = f'UPDATE ANSWERS SET RISPOSTA = "{risposta}" WHERE IDDOMANDA = "{key}" AND EMAIL = "{email}";'
@@ -56,16 +60,26 @@ def inserisci_modifica_risposte(email):
     del connection
 
 
-def risposte_totali(email: str) -> list:
+def risposte_totali(email: str, role: str) -> list:
     """
     Crea degli oggetti Quiz partendo dalle domande inserite nella tabella ANSWERS del DB.
     :param email: L'email dell'utente.
+    :param role: La figura lavorativa scelta dall'utente.
     :return: Lista di oggetti Quiz.
     """
     quiz_tot = []
     connection: DB = DB(config)
+
+    if role == 'data_analyst':
+        role = 1
+    else:
+        role = 0
+
     query = f'SELECT ASSESSMENT.*, ANSWERS.RISPOSTA FROM ASSESSMENT JOIN ANSWERS ON ASSESSMENT.ID = ANSWERS.IDDOMANDA ' \
-            f'WHERE ANSWERS.EMAIL = "{email}";'
+            f'JOIN SKILLS ON ASSESSMENT.SKILL = SKILLS.SKILL ' \
+            f'WHERE ANSWERS.EMAIL = "{email}" ' \
+            f'AND (SKILLS.ROLE = "{role}" OR SKILLS.ROLE = "2");'
+
     righe: tuple = connection.fetch(query, args=None)
     for riga in righe:
         quiz = Quiz(riga[0], riga[1], riga[2], riga[3], riga[4], riga[5], riga[6], riga[7])
@@ -126,7 +140,7 @@ def questionario():
     role = request.args.get('role')
     email = request.args.get('email')
 
-    if role == 'data analyst':
+    if role == 'data_analyst':
         if skill == 'inizio':
             skill = 'AWS'
         elif skill == 'AWS':
@@ -138,7 +152,7 @@ def questionario():
         elif skill == 'Excel':
             skill = 'PowerBI'
         elif skill == 'PowerBI':
-            quiz_tot: list = risposte_totali(email)
+            quiz_tot: list = risposte_totali(email, role)
             counter_tot: list = contatore_totale(quiz_tot)
             plot(role, counter_tot)
             return render_template('evaluation_analyst.html', quiz_tot=quiz_tot, counter_tot=counter_tot, email=email)
@@ -155,7 +169,7 @@ def questionario():
         elif skill == 'R':
             skill = 'Git'
         elif skill == 'Git':
-            quiz_tot: list = risposte_totali(email)
+            quiz_tot: list = risposte_totali(email, role)
             counter_tot: list = contatore_totale(quiz_tot)
             plot(role, counter_tot)
             return render_template('evaluation_scientist.html', quiz_tot=quiz_tot, counter_tot=counter_tot, email=email)

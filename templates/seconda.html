@@ -12,8 +12,7 @@
         function generaNuovoURL(button) {
             const emailValue = document.getElementById("InputEmail").value;
             const role = button.id;
-            const url = 'http://127.0.0.1:5000/quiz?skill=inizio&role=' + role + '&email=' + emailValue;
-            window.location.href = url;
+            window.location.href = 'http://127.0.0.1:5000/quiz?skill=inizio&role=' + role + '&email=' + emailValue;
         }
     </script>
 </head>
@@ -66,10 +65,10 @@
                 </div>
                 <br>
                 <div>
-                    <button class="btn btn-primary px-3" id="data analyst" onclick="generaNuovoURL(this)">Data
+                    <button class="btn btn-primary px-3" id="data_analyst" onclick="generaNuovoURL(this)">Data
                         Analyst
                     </button>
-                    <button class="btn btn-primary px-3" id="data scientist" onclick="generaNuovoURL(this)">Data
+                    <button class="btn btn-primary px-3" id="data_scientist" onclick="generaNuovoURL(this)">Data
                         Scientist
                     </button>
                 </div>

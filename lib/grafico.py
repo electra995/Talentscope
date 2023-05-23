@@ -3,7 +3,7 @@ import plotly.offline as py
 
 
 def plot(role, counter_tot):
-    if role == 'data analyst':
+    if role == 'data_analyst':
         categories = ['AWS', 'Python', 'MySQL', 'Excel', 'PowerBI']
         path = './templates/chart-analyst.html'
 
