@@ -2,7 +2,7 @@ import plotly.graph_objects as go
 import plotly.offline as py
 
 
-def plot(role, counter_tot, domande_tot):
+def plot(role, counter_tot):
     if role == 'data analyst':
         categories = ['AWS', 'Python', 'MySQL', 'Excel', 'PowerBI']
         path = './templates/chart-analyst.html'
@@ -13,7 +13,7 @@ def plot(role, counter_tot, domande_tot):
 
     categories = [*categories, categories[0]]
 
-    perfect_skills = [domande_tot, domande_tot, domande_tot, domande_tot, domande_tot]
+    perfect_skills = [x.risposte_tot for x in counter_tot]
     user = [x.risposte_esatte for x in counter_tot]
     perfect_skills = [*perfect_skills, perfect_skills[0]]
     user = [*user, user[0]]

@@ -106,8 +106,8 @@
             <tr>
                 {% for quiz in quiz_tot %}
                     <td>{{ quiz.domanda }}</td>
-                    <td>{{ quiz.risposte['Esatta'] }}</td>
-                    <td>{{ quiz.risposte[quiz.risposte['Data']] }}</td>
+                    <td>{{ quiz.risposte['RISPOSTAESATTA'] }}</td>
+                    <td>{{ quiz.risposte['RISPOSTA'] }}</td>
                     </tr>
                 {% endfor %}
             </tbody>
@@ -302,10 +302,21 @@
         <br>
     </div>
 </div>
-
+<div class="container col-xxl-10 col-xxl-8 px-4 py-40">
+    <br>
+    <h1 class="display-4 fw-bold lh-1 text-center mb-3">Retry or reset your data:</h1>
+    <br>
+    <div style="justify-content: center;display: flex;">
+        <button class="btn btn-primary btn-lg px-5 col-2" id="restart" style="margin-right: 10px;"
+                onclick="window.location.href='{{ url_for('seconda') }}'">Restart
+        </button>
+        <button class="btn btn-primary btn-lg px-5 col-2" id="reset"
+                onclick="window.location.href='{{ url_for('reset', email=email) }}'">Reset
+        </button>
+    </div>
+</div>
 
 <script src="../static/assets/graphic/js/bootstrap.bundle.min.js"></script>
-
 <script src="https://cdn.jsdelivr.net/npm/feather-icons@4.28.0/dist/feather.min.js"
         integrity="sha384-uO3SXW5IuS1ZpFPKugNNWqTZRRglnUJK6UAZ/gxOX80nxEkN9NcGZTftn6RzhGWE"
         crossorigin="anonymous"></script>
@@ -347,7 +358,8 @@
         </div>
 
         <ul class="nav col-md-4 justify-content-end list-unstyled d-flex">
-            <li class="nav-item"><a href="#" class="nav-link px-2 text-body-secondary">info_TalentScope@generation.com</a>
+            <li class="nav-item"><a href="#"
+                                    class="nav-link px-2 text-body-secondary">info_TalentScope@generation.com</a>
             </li>
             <li class="ms-3"><a class="text-body-secondary" href="#">
                 <svg class="bi" width="24" height="24">

@@ -1,6 +1,5 @@
 import json
-from itertools import groupby
-from flask import Flask, redirect, url_for
+from flask import Flask, redirect, url_for, jsonify
 from flask import render_template
 from flask import request
 from lib.Database import DB
@@ -9,23 +8,21 @@ from lib.Contatore import Contatore
 from lib.grafico import plot
 
 app = Flask(__name__)
-quiz_tot = []
-quiz_per_skill = []
 
 with open('db/config.json', 'r') as f:
     config = json.load(f)
 
 
-def query_db(skill: str):
+def domande_per_skill(skill: str, limit: int) -> list:
     """
     Interroga il database e aggiunge alla lista quiz_per_skill gli oggetti Quiz.
+    :param limit: Il limite di domande da proporre.
     :param skill: Il nome della skill.
-    :return:
+    :return: Lista di domande per skill.
     """
-    global quiz_per_skill
     quiz_per_skill = []
     connection: DB = DB(config)
-    query: str = f'SELECT * FROM ASSESMENT WHERE SKILL = "{skill}" LIMIT 3'
+    query: str = f'SELECT * FROM ASSESSMENT WHERE SKILL = "{skill}" ORDER BY RAND() LIMIT {limit}'
     righe: list = connection.fetch(query, args=None)
     del connection
 
@@ -33,43 +30,83 @@ def query_db(skill: str):
         quiz = Quiz(riga[0], riga[1], riga[2], riga[3], riga[4], riga[5], riga[6])
         quiz_per_skill.append(quiz)
 
+    return quiz_per_skill
 
-def popola_quiz():
+
+def inserisci_modifica_risposte(email):
     """
-    Riempie la lista quiz_tot con gli oggetti Quiz impostando anche la risposta dell'utente.
+    Inserisce o modifica le risposte per ogni utente nella tabella ANSWERS del DB.
+    :param email: L'email dell'utente.
     :return:
     """
-    global quiz_per_skill
-    global quiz_tot
+    connection: DB = DB(config)
     risposte = dict(request.form)
     for key in risposte.keys():
-        for quiz in quiz_per_skill:
-            if quiz.id == int(key):
-                quiz.set_risposta_data(risposte[key])
-                quiz_tot.append(quiz)
+        query = f'SELECT RISPOSTA FROM ANSWERS WHERE IDDOMANDA = "{key}" AND EMAIL = "{email}";'
+        id_domanda: str = connection.fetchone(query, args=None)
+        query = f'SELECT {risposte[key]} FROM ASSESSMENT WHERE ID = "{key}";'
+        risposta: str = connection.fetchone(query, args=None)[0]
+        if id_domanda is None:
+            query = f'INSERT INTO ANSWERS(IDDOMANDA, RISPOSTA, EMAIL) VALUES (%s, %s, %s);'
+            args = (key, risposta, email)
+            connection.insert(query, args=args)
+        else:
+            query = f'UPDATE ANSWERS SET RISPOSTA = "{risposta}" WHERE IDDOMANDA = "{key}" AND EMAIL = "{email}";'
+            connection.update(query, args=None)
+    del connection
 
 
-def popola_counter():
+def risposte_totali(email: str) -> list:
     """
-    Raggruppa le risposte totali per ogni skill e popola una lista di oggetti Contatore in cui tenere traccia delle
-    risposte corrette date dall'utente.
-    :return: Lista di oggetti contatore.
+    Crea degli oggetti Quiz partendo dalle domande inserite nella tabella ANSWERS del DB.
+    :param email: L'email dell'utente.
+    :return: Lista di oggetti Quiz.
     """
-    global quiz_tot
-    risposte_per_skill = {}
+    quiz_tot = []
+    connection: DB = DB(config)
+    query = f'SELECT ASSESSMENT.*, ANSWERS.RISPOSTA FROM ASSESSMENT JOIN ANSWERS ON ASSESSMENT.ID = ANSWERS.IDDOMANDA ' \
+            f'WHERE ANSWERS.EMAIL = "{email}";'
+    righe: tuple = connection.fetch(query, args=None)
+    for riga in righe:
+        quiz = Quiz(riga[0], riga[1], riga[2], riga[3], riga[4], riga[5], riga[6], riga[7])
+        quiz_tot.append(quiz)
+
+    return quiz_tot
+
+
+def contatore_totale(quiz_tot: list) -> list:
+    """
+    Crea degli oggetti Contatore che divide le domande esatte per ogni skill.
+    :param quiz_tot: La lista di oggetti Quiz.
+    :return: Lista di oggetti Contatore.
+    """
     counter_tot = []
+    counter_dict = {}
 
-    for key, group in groupby(quiz_tot, lambda x: x.skill):
-        risposte_per_skill[key] = list(group)
+    for quiz in quiz_tot:
+        skill = quiz.skill
+        if skill in counter_dict:
+            counter_dict[skill][0] += quiz.check_risposta()
+            counter_dict[skill][1] += 1
+        else:
+            counter_dict[skill] = [quiz.check_risposta(), 1]
 
-    for key in risposte_per_skill.keys():
-        counter = 0
-        for quiz in risposte_per_skill[key]:
-            if quiz.check_risposta():
-                counter += 1
-        counter_tot.append(Contatore(key, counter, len(risposte_per_skill[key])))
+    for skill, (risposte_corrette, totale_domande) in counter_dict.items():
+        counter_tot.append(Contatore(skill, risposte_corrette, totale_domande))
 
     return counter_tot
+
+
+def cancella_dati(email: str):
+    """
+    Elimina i dati relativi a un utente.
+    :param email: L'email dell'utente.
+    :return:
+    """
+    connection: DB = DB(config)
+    query = f'DELETE FROM ANSWERS WHERE EMAIL = "{email}" AND ID <> 0;'
+    connection.update(query, args=None)
+    del connection
 
 
 @app.route('/')
@@ -82,15 +119,15 @@ def seconda():
     return render_template('seconda.html')
 
 
-@app.route('/quiz/<skill>&<role>', methods=['GET'])
-def questionario(skill: str, role: str):
-    global quiz_per_skill
-    global quiz_tot
+@app.route('/quiz', methods=['GET'])
+def questionario():
+    limit: int = 3
+    skill = request.args.get('skill')
+    role = request.args.get('role')
+    email = request.args.get('email')
 
     if role == 'data analyst':
-
         if skill == 'inizio':
-            quiz_tot = []
             skill = 'AWS'
         elif skill == 'AWS':
             skill = 'Python'
@@ -101,13 +138,13 @@ def questionario(skill: str, role: str):
         elif skill == 'Excel':
             skill = 'PowerBI'
         elif skill == 'PowerBI':
-            counter_tot = popola_counter()
-            plot(role, counter_tot, len(quiz_per_skill))
-            return render_template('evaluation_analyst.html', quiz_tot=quiz_tot, counter_tot=counter_tot)
+            quiz_tot: list = risposte_totali(email)
+            counter_tot: list = contatore_totale(quiz_tot)
+            plot(role, counter_tot)
+            return render_template('evaluation_analyst.html', quiz_tot=quiz_tot, counter_tot=counter_tot, email=email)
 
     else:
         if skill == 'inizio':
-            quiz_tot = []
             skill = 'ML'
         elif skill == 'ML':
             skill = 'Python'
@@ -118,22 +155,28 @@ def questionario(skill: str, role: str):
         elif skill == 'R':
             skill = 'Git'
         elif skill == 'Git':
-            counter_tot = popola_counter()
-            plot(role, counter_tot, len(quiz_per_skill))
-            return render_template('evaluation_scientist.html', quiz_tot=quiz_tot, counter_tot=counter_tot)
+            quiz_tot: list = risposte_totali(email)
+            counter_tot: list = contatore_totale(quiz_tot)
+            plot(role, counter_tot)
+            return render_template('evaluation_scientist.html', quiz_tot=quiz_tot, counter_tot=counter_tot, email=email)
 
-    query_db(skill)
+    quiz_per_skill = domande_per_skill(skill, limit)
 
-    return render_template('quiz.html', quiz_per_skill=quiz_per_skill, skill=skill, role=role)
+    return render_template('quiz.html',
+                           quiz_per_skill=quiz_per_skill,
+                           skill=skill,
+                           role=role,
+                           email=email)
 
 
-@app.route('/post/quiz/', methods=['POST'])
+@app.route('/quiz/post/', methods=['POST'])
 def post_quiz():
     skill = request.args.get('skill')
     role = request.args.get('role')
-    popola_quiz()
+    email = request.args.get('email')
+    inserisci_modifica_risposte(email)
 
-    return redirect(url_for('questionario', skill=skill, role=role))
+    return redirect(url_for('questionario', skill=skill, role=role, email=email))
 
 
 @app.route('/about')
@@ -154,6 +197,13 @@ def chart_analyst():
 @app.route('/chart-scientist')
 def chart_scientist():
     return render_template('chart-scientist.html')
+
+
+@app.route('/reset')
+def reset():
+    email = request.args.get('email')
+    cancella_dati(email)
+    return redirect(url_for('seconda'))
 
 
 @app.errorhandler(404)

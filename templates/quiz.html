@@ -42,17 +42,18 @@
                 </div>
                 <div class="container xxl-8">
 
-                    <form action="{{ url_for('post_quiz', skill=skill, role=role) }}" method="POST" role="form">
+                    <form action="{{ url_for('post_quiz', skill=skill, role=role, email=email) }}" method="POST"
+                          role="form">
                         {% for quiz in quiz_per_skill %}
                             <div class="question">
                                 <h4 id={{ quiz.id }}>{{ quiz.domanda }}</h4> <br>
-                                {% for key, value in quiz.risposte.items() if key != 'Data' %}
+                                {% for key, value in quiz.risposte.items() if key != 'RISPOSTA' %}
                                     <div class>
-                                        <h6>
-                                            <input id={{ key }} type="radio" name={{ quiz.id }} value={{ key }}>
-
-                                            <label for={{ key }}>{{ value }}</label>
-                                        </h6>
+                                        <div class="d-flex align-items-center">
+                                            <input id={{ key }} type="radio" name={{ quiz.id }} value={{ key }}
+                                                   style="transform: scale(1.5); margin-right: 10px">
+                                            <label style="font-weight: 400" for={{ key }}>{{ value }}</label>
+                                        </div>
                                     </div>
                                     <br>
                                 {% endfor %}
@@ -103,7 +104,8 @@
         </div>
 
         <ul class="nav col-md-4 justify-content-end list-unstyled d-flex">
-            <li class="nav-item"><a href="#" class="nav-link px-2 text-body-secondary">info_TalentScope@generation.com</a>
+            <li class="nav-item"><a href="#"
+                                    class="nav-link px-2 text-body-secondary">info_TalentScope@generation.com</a>
             </li>
             <li class="ms-3"><a class="text-body-secondary" href="#">
                 <svg class="bi" width="24" height="24">
