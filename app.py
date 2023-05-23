@@ -1,5 +1,5 @@
 import json
-from flask import Flask, redirect, url_for, jsonify
+from flask import Flask, redirect, url_for
 from flask import render_template
 from flask import request
 from lib.Database import DB
@@ -22,7 +22,10 @@ def domande_per_skill(skill: str, limit: int) -> list:
     """
     quiz_per_skill = []
     connection: DB = DB(config)
-    query: str = f'SELECT * FROM ASSESSMENT WHERE SKILL = "{skill}" ORDER BY RAND() LIMIT {limit}'
+    query: str = f'SELECT * FROM ASSESSMENT ' \
+                 f'WHERE SKILL = "{skill}" ' \
+                 f'ORDER BY RAND() LIMIT {limit}'
+
     righe: list = connection.fetch(query, args=None)
     del connection
 
@@ -42,20 +45,28 @@ def inserisci_modifica_risposte(email: str):
     connection: DB = DB(config)
     risposte = dict(request.form)
     for key in risposte.keys():
-        query = f'SELECT RISPOSTA FROM ANSWERS WHERE IDDOMANDA = "{key}" AND EMAIL = "{email}";'
+        query = f'SELECT RISPOSTA FROM ANSWERS ' \
+                f'WHERE IDDOMANDA = "{key}" AND EMAIL = "{email}";'
+
         check: str = connection.fetchone(query, args=None)
-        query = f'SELECT {risposte[key]}, SKILL FROM ASSESSMENT WHERE ID = "{key}";'
+        query = f'SELECT {risposte[key]}, SKILL FROM ASSESSMENT ' \
+                f'WHERE ID = "{key}";'
+
         risposta_skill: tuple = connection.fetchone(query, args=None)
         risposta: str = risposta_skill[0]
         skill: str = risposta_skill[1]
         if check is None:
-            query = f'SELECT ID FROM SKILLS WHERE SKILL = "{skill}"'
+            query = f'SELECT ID FROM SKILLS ' \
+                    f'WHERE SKILL = "{skill}"'
+
             skill_id: str = connection.fetchone(query, args=None)[0]
             query = f'INSERT INTO ANSWERS(IDDOMANDA, IDSKILL, RISPOSTA, EMAIL) VALUES (%s, %s, %s, %s);'
             args = (key, skill_id, risposta, email)
             connection.insert(query, args=args)
         else:
-            query = f'UPDATE ANSWERS SET RISPOSTA = "{risposta}" WHERE IDDOMANDA = "{key}" AND EMAIL = "{email}";'
+            query = f'UPDATE ANSWERS SET RISPOSTA = "{risposta}" ' \
+                    f'WHERE IDDOMANDA = "{key}" AND EMAIL = "{email}";'
+
             connection.update(query, args=None)
     del connection
 
@@ -75,7 +86,9 @@ def risposte_totali(email: str, role: str) -> list:
     else:
         role = 0
 
-    query = f'SELECT ASSESSMENT.*, ANSWERS.RISPOSTA FROM ASSESSMENT JOIN ANSWERS ON ASSESSMENT.ID = ANSWERS.IDDOMANDA ' \
+    query = f'SELECT ASSESSMENT.*, ANSWERS.RISPOSTA ' \
+            f'FROM ASSESSMENT ' \
+            f'JOIN ANSWERS ON ASSESSMENT.ID = ANSWERS.IDDOMANDA ' \
             f'JOIN SKILLS ON ASSESSMENT.SKILL = SKILLS.SKILL ' \
             f'WHERE ANSWERS.EMAIL = "{email}" ' \
             f'AND (SKILLS.ROLE = "{role}" OR SKILLS.ROLE = "2");'
@@ -118,7 +131,9 @@ def cancella_dati(email: str):
     :return:
     """
     connection: DB = DB(config)
-    query = f'DELETE FROM ANSWERS WHERE EMAIL = "{email}" AND ID <> 0;'
+    query = f'DELETE FROM ANSWERS ' \
+            f'WHERE EMAIL = "{email}" AND ID <> 0;'
+
     connection.update(query, args=None)
     del connection
 
@@ -222,6 +237,7 @@ def reset():
 
 @app.errorhandler(404)
 def page_not_found(e):
+    print(e)
     return render_template('error404.html'), 404
 
 
