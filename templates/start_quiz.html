@@ -8,13 +8,6 @@
     <link rel="canonical" href="https://getbootstrap.com/docs/5.3/examples/headers/">
 
     <link href="../static/assets/graphic/css/bootstrap.min.css" rel="stylesheet">
-    <script>
-        function generaNuovoURL(button) {
-            const emailValue = document.getElementById("InputEmail").value;
-            const role = button.id;
-            window.location.href = 'http://127.0.0.1:5000/quiz?skill=inizio&role=' + role + '&email=' + emailValue;
-        }
-    </script>
 </head>
 <body>
 <div class="container">
@@ -33,7 +26,7 @@
 
         <ul class="nav col-12 col-md-auto mb-2 justify-content-center mb-md-0">
             <li><a href="{{ url_for('index') }}" class="nav-link px-2 link-secondary">Home</a></li>
-            <li><a href="{{ url_for('seconda') }}" class="nav-link px-2 link-secondary">Assessment</a></li>
+            <li><a href="{{ url_for('start_quiz') }}" class="nav-link px-2 link-secondary">Assessment</a></li>
             <li><a href="{{ url_for('about_us') }}" class="nav-link px-2 link-secondary">About us</a></li>
             <li><a href="{{ url_for('graph') }}" class="nav-link px-2 link-secondary">Insight</a></li>
         </ul>
@@ -58,20 +51,26 @@
                 <h1 class="display-4 fw-bold lh-1 mb-3">Start the assessment for:</h1>
             </div>
             <div class="col-lg-6 col-xxl-4 my-5">
-                <div class="d-grid gap-2">
-                    <label for="InputEmail">Enter your email address:</label>
-                    <input type="email" class="form-control" id="InputEmail" aria-describedby="emailHelp"
-                           placeholder="Enter email" required>
-                </div>
-                <br>
-                <div>
-                    <button class="btn btn-primary px-3" id="data_analyst" onclick="generaNuovoURL(this)">Data
-                        Analyst
-                    </button>
-                    <button class="btn btn-primary px-3" id="data_scientist" onclick="generaNuovoURL(this)">Data
-                        Scientist
-                    </button>
-                </div>
+                <form action="{{ url_for('questionario', skill='inizio') }}" method="POST" role="form">
+                    <div class="d-grid gap-2">
+                        <label for="InputEmail">Enter your email address:</label>
+                        <input name="email" type="email" class="form-control" id="InputEmail"
+                               aria-describedby="emailHelp"
+                               placeholder="Enter email" required>
+                    </div>
+                    <br>
+                    <div>
+                        <select class="form-select" aria-label="Choose your role" id="roleSelect" name="role">
+                            <option selected value="data_analyst">Data Analyst</option>
+                            <option value="data_scientist">Data Scientist</option>
+                        </select>
+                    </div>
+                    <br>
+                    <div>
+                        <button type="submit" class="btn btn-primary px-3" id="get_started">Get Started
+                        </button>
+                    </div>
+                </form>
             </div>
         </div>
     </div>

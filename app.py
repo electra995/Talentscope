@@ -143,17 +143,23 @@ def index():
     return render_template('home.html')
 
 
-@app.route('/valutazione')
-def seconda():
-    return render_template('seconda.html')
+@app.route('/start_quiz')
+def start_quiz():
+    return render_template('start_quiz.html')
 
 
-@app.route('/quiz', methods=['GET'])
+@app.route('/quiz', methods=['GET', 'POST'])
 def questionario():
     limit: int = 3
-    skill = request.args.get('skill')
-    role = request.args.get('role')
-    email = request.args.get('email')
+    if request.method == 'POST':
+        skill = request.args.get('skill')
+        email = request.form.get('email')
+        role = request.form.get('role')
+
+    else:
+        skill = request.args.get('skill')
+        role = request.args.get('role')
+        email = request.args.get('email')
 
     if role == 'data_analyst':
         if skill == 'inizio':
@@ -232,7 +238,7 @@ def chart_scientist():
 def reset():
     email = request.args.get('email')
     cancella_dati(email)
-    return redirect(url_for('seconda'))
+    return redirect(url_for('start_quiz'))
 
 
 @app.errorhandler(404)

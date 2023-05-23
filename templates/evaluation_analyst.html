@@ -43,7 +43,7 @@
 
         <ul class="nav col-12 col-md-auto mb-2 justify-content-center mb-md-0">
             <li><a href="{{ url_for('index') }}" class="nav-link px-2 link-secondary">Home</a></li>
-            <li><a href="{{ url_for('seconda') }}" class="nav-link px-2 link-secondary">Assessment</a></li>
+            <li><a href="{{ url_for('start_quiz') }}" class="nav-link px-2 link-secondary">Assessment</a></li>
             <li><a href="{{ url_for('about_us') }}" class="nav-link px-2 link-secondary">About us</a></li>
             <li><a href="{{ url_for('graph') }}" class="nav-link px-2 link-secondary">Insight</a></li>
         </ul>
@@ -311,7 +311,7 @@
     <br>
     <div style="justify-content: center;display: flex;">
         <button class="btn btn-primary btn-lg px-5 col-2" id="restart" style="margin-right: 10px;"
-                onclick="window.location.href='{{ url_for('seconda') }}'">Restart
+                onclick="window.location.href='{{ url_for('start_quiz') }}'">Restart
         </button>
         <button class="btn btn-primary btn-lg px-5 col-2" id="reset"
                 onclick="window.location.href='{{ url_for('reset', email=email) }}'">Reset
